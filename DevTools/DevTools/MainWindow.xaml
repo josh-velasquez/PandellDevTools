@@ -4,50 +4,51 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DevTools"
+        WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         Title="Dev Tools" Height="394" Width="324" Background="#FF264653">
     <Grid>
-        <Label Content="Source Directory:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.431,0.126" Foreground="#FFE76F51"/>
-        <Button Content="Build + Start Server" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top" Width="139" Height="26" Background="#FFE9C46A" Foreground="#FFF4F1DE" Click="OnBuildStartServerClick" >
+        <Label Content="Source Directory:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.431,0.126" Foreground="White"/>
+        <Button Content="Build + Start Server" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top" Width="139" Height="26" Background="#FFE9C46A" Foreground="Black" Click="OnBuildStartServerClick" >
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4" />
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Content="Clobber Time" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="139" Height="26" Background="#FFE9C46A" Foreground="#FFF4F1DE" Click="OnClobberClick" >
+        <Button Content="Clobber Time" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="139" Height="26" Background="#FFE9C46A" Foreground="Black" Click="OnClobberClick" >
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4" />
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Content="Launch Dev Tool" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalAlignment="Top" Width="139" Height="26" Background="#FFE9C46A" Foreground="#FFF4F1DE" Click="OnLaunchDevToolClick" >
+        <Button Content="Launch Dev Tool" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalAlignment="Top" Width="139" Height="26" Background="#FFE9C46A" Foreground="Black" Click="OnLaunchDevToolClick" >
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4" />
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Content="Launch" HorizontalAlignment="Left" Margin="154,72,0,0" VerticalAlignment="Top" Width="148" Height="26" Background="#FFE76F51" Foreground="#FFF4F1DE" Click="OnLaunchClick" >
+        <Button  HorizontalAlignment="Left" Margin="154,72,0,0" VerticalAlignment="Top" Width="148" Height="88" Background="#FFE76F51" Foreground="#FFF4F1DE" Click="OnLaunchClick" >
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="4" />
+                </Style>
+            </Button.Resources>
+            <Image Height="49" Width="80" Source="/launch.png"/>
+        </Button>
+        <Button Content="Create Pull Request" HorizontalAlignment="Left" Margin="154,41,0,0" VerticalAlignment="Top" Width="148" Height="26" Background="#FFE9C46A" Foreground="Black" Click="OnCreatePrClick" >
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4" />
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Content="Create Pull Request" HorizontalAlignment="Left" Margin="154,103,0,0" VerticalAlignment="Top" Width="148" Height="26" Background="#FFE9C46A" Foreground="#FFF4F1DE" Click="OnCreatePrClick" >
-            <Button.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="4" />
-                </Style>
-            </Button.Resources>
-        </Button>
-        <Label Content="Tools:" HorizontalAlignment="Left" Margin="154,41,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.322,0.489" Foreground="#FFE76F51"/>
         <TextBox x:Name="SrcDirTextBox" HorizontalAlignment="Left" Margin="115,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="187" VerticalContentAlignment="Center" Height="25" Background="#FF2A9D8F" Foreground="White"/>
-        <Label Content="Status:" HorizontalAlignment="Left" Margin="10,165,0,0" VerticalAlignment="Top" Foreground="#FFE76F51"/>
+        <Label Content="Status:" HorizontalAlignment="Left" Margin="10,165,0,0" VerticalAlignment="Top" Foreground="White"/>
         <ListBox x:Name="StatusListBox" Margin="10,196,10,10" Background="#FF2A9D8F" Foreground="White"/>
-        <Button Content="Delete Temp ASP Files" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top" Width="139" Height="26" Background="#FFE9C46A" Foreground="#FFF4F1DE" Click="OnDelTempAspFilesClick" >
+        <Button Content="Delete Temp ASP Files" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top" Width="139" Height="26" Background="#FFE9C46A" Foreground="Black" Click="OnDelTempAspFilesClick" >
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4" />

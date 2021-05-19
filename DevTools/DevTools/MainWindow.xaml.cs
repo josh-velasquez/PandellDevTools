@@ -1,8 +1,13 @@
-﻿using System;
+﻿using DevTools.Tools;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+using static DevTools.Tools.WindowCommands;
 
 namespace DevTools
 {
@@ -29,13 +34,14 @@ namespace DevTools
         public MainWindow()
         {
             InitializeComponent();
-            var repoSourceDirectory = "D:\\Repository\\LandRiteWeb";
+            var repoSourceDirectory = @"D:\Repository\LandRiteWeb";
             SrcDirTextBox.Text = repoSourceDirectory;
         }
 
         private void OnCreatePrClick(object sender, RoutedEventArgs e)
         {
             PrGenerator prGenerator = new PrGenerator();
+            prGenerator.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             prGenerator.Show();
         }
 
@@ -54,11 +60,21 @@ namespace DevTools
 
         private void OnLaunchDevToolClick(object sender, RoutedEventArgs e)
         {
-            StatusListBox.Items.Add("Launching dev tool...");
+            var devToolPath = Path.Combine(SrcDirTextBox.Text, "tools", "LR_Start-DevTool.ps1");
+            UpdateStatus("Launching Dev Tool...", false);
+            try
+            {
+                ProcessCommands.RunCommand(devToolPath);
+                UpdateStatus("Dev tool started.", true, true);
+            }
+            catch (Exception ex)
+            {
+                UpdateStatus("Dev tool started.", true, true);
+                Debug.WriteLine("Error: " + ex);
+            }
         }
 
-
-        private void ConnectToVpn()
+        private bool ConnectToVpn()
         {
             try
             {
@@ -66,121 +82,240 @@ namespace DevTools
                 Thread.Sleep(2000);
 
                 // Move and to tray icon
-                Tools.SetPosition(2351, (1440 - 16));
-                Tools.SendClick();
+                MouseCommands.MoveAndClick(2351, (1440 - 16));
                 Thread.Sleep(500);
 
                 // Move and click to connect icon
-                Tools.SetPosition(2401, (1440 - 77));
-                Tools.SendClick();
+                MouseCommands.MoveAndClick(2401, (1440 - 77));
                 Thread.Sleep(10000);
 
                 // close tray
-                Tools.SetPosition(2351, (1440 - 16));
-                Tools.SendClick();
+                MouseCommands.MoveAndClick(2351, (1440 - 16));
             }
             catch(Exception e)
             {
                 Debug.WriteLine("Error: " + e);
+                return false;
             }
+            return true;
         }
 
-        private void LaunchSlack()
+        private bool LaunchSlack()
         {
-            Process.Start(SLACK_PATH);
-        }
-
-        private void LaunchOutlook()
-        {
-            Process.Start(OUTLOOK_PATH);
-            //PowershellTerminal.SendCommand(OUTLOOK_PATH);
-        }
-
-        private void LaunchChromeWebsites(string url)
-        {
-            Process.Start(CHROME_PATH, url);
-        }
-
-        private void LaunchSpotify()
-        {
-            Process.Start(SPOTIFY_PATH);
-        }
-
-        private void LaunchWindowsTerminal()
-        {
-            Process.Start(WINDOWSTERMINAL_PATH);
-        }
-
-        // -15 to account for task bar
-        // task bar height = 30 pixels so 30/2 = 15 and remove 15 pixels to each height (if half)
-        private void ResizeAppRightTopVertical(string targetApp) {
-            Process process = Process.GetProcessesByName(targetApp)[0];
-            IntPtr handle = process.MainWindowHandle;
-            Tools.WindowPositioning windowPositioning = new Tools.WindowPositioning();
-            if (Tools.GetWindowRect(handle, ref windowPositioning))
+            try
             {
-                Tools.MoveWindow(handle, HORIZONTAL_SCREEN_WIDTH, -300, HORIZONTAL_SCREEN_HEIGHT, (HORIZONTAL_SCREEN_WIDTH/2)-15, true);
+                ProcessCommands.RunCommand(SLACK_PATH);
             }
-        }
-        // -15 to account for task bar
-        // task bar height = 30 pixels so 30/2 = 15 and remove 15 pixels to each height (if half)
-        private void ResizeAppRightBottomVertical(string targetApp)
-        {
-            Process process = Process.GetProcessesByName(targetApp)[0];
-            IntPtr handle = process.MainWindowHandle;
-            Tools.WindowPositioning windowPositioning = new Tools.WindowPositioning();
-            if (Tools.GetWindowRect(handle, ref windowPositioning))
+            catch (Exception e)
             {
-                Tools.MoveWindow(handle, HORIZONTAL_SCREEN_WIDTH, 965, HORIZONTAL_SCREEN_HEIGHT, (HORIZONTAL_SCREEN_WIDTH / 2) - 15, true);
+                Debug.WriteLine("Error: " + e);
+                return false;
             }
+            return true;
         }
 
-        private void ResizeAppLeftFullVertical(string targetApp)
+        private bool LaunchOutlook()
         {
-            Process process = Process.GetProcessesByName(targetApp)[0];
-            IntPtr handle = process.MainWindowHandle;
-            Tools.WindowPositioning windowPositioning = new Tools.WindowPositioning();
-            if (Tools.GetWindowRect(handle, ref windowPositioning))
+            try
             {
-                // Move to the left
-                Tools.MoveWindow(handle, -2000, 0, windowPositioning.right, windowPositioning.top, true);
-                // Maximize
-                Tools.ShowWindow(handle, Tools.SW_SHOWMAXIMIZED);
+                ProcessCommands.RunCommand(OUTLOOK_PATH);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Error: " + e);
+                return false;
+            }
+            return true;
+        }
+
+        private bool LaunchChromeWebsites()
+        {
+            try
+            {
+                foreach (var website in WEBSITES)
+                {
+                    ProcessCommands.RunCommand(CHROME_PATH, website.Value);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Error: " + e);
+                return false;
+            }
+            return true;
+        }
+
+        private bool LaunchSpotify()
+        {
+            try
+            {
+                ProcessCommands.RunCommand(SPOTIFY_PATH);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Error: " + e);
+                return false;
+            }
+            return true;
+        }
+
+        private bool LaunchWindowsTerminal()
+        {
+            try
+            {
+                ProcessCommands.RunCommand(WINDOWSTERMINAL_PATH);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Error: " + e);
+                return false;
+            }
+            return true;
+        }
+        
+        private bool ResizeWindowRightHalfTopVertical(Programs targetWindow) {
+            try
+            {
+                WindowCommands.ResizeWindowRightHalfTopVertical(targetWindow, HORIZONTAL_SCREEN_WIDTH, HORIZONTAL_SCREEN_HEIGHT);
+            }
+            catch(Exception e)
+            {
+                Debug.WriteLine("Error: " + e);
+                return false;
+            }
+            return true;
+        }
+
+        private bool ResizeWindowRightHalfBottomVertical(Programs targetWindow)
+        {
+            try
+            {
+                WindowCommands.ResizeWindowRightHalfBottomVertical(targetWindow, HORIZONTAL_SCREEN_WIDTH, HORIZONTAL_SCREEN_HEIGHT);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Error: " + e);
+                return false;
+            }
+            return true;
+        }
+
+        private bool ResizeWindowLeftMaximizedVertical(Programs targetWindow)
+        {
+            try
+            {
+                WindowCommands.ResizeWindowLeftMaximizedVertical(targetWindow);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Error: " + e);
+                return false;
+            }
+            return true;
+        }
+
+        private void UpdateStatus(string message, bool commandUpdate, bool success = false)
+        {
+            if (commandUpdate)
+            {
+                if (success)
+                    StatusListBox.Items.Add(new ListBoxItem { Content = message, Background = Brushes.LightGreen });
+                else
+                    StatusListBox.Items.Add(new ListBoxItem { Content = message, Background = Brushes.Red });
+            }
+            else
+            {
+                StatusListBox.Items.Add(new ListBoxItem { Content = message, Background = Brushes.Gray });
             }
         }
 
         private void OnLaunchClick(object sender, RoutedEventArgs e)
         {
-            //StatusListBox.Items.Add("Launching programs...");
-            //// Connect to vpn
-            //StatusListBox.Items.Add("Connecting to VPN...");
-            ////ConnectToVpn();
-            //StatusListBox.Items.Add("Connected to VPN.");
-            //// launch slack
-            //StatusListBox.Items.Add("Launching Slack...");
-            //LaunchSlack();
-            //// launch outlook
-            //StatusListBox.Items.Add("Launching Outlook...");
-            //LaunchOutlook();
-            //// launch chrome
-            //foreach (var website in WEBSITES)
-            //{
-            //    LaunchChromeWebsites(website.Value);
-            //}
-            //// launch spotify
-            //StatusListBox.Items.Add("Launching Spotify...");
-            //LaunchSpotify();
-            //// launch terminal
-            //LaunchWindowsTerminal();
-            //ResizeAppRightTopVertical("slack");
-            //ResizeAppRightBottomVertical("outlook");
-            ResizeAppLeftFullVertical("chrome");
+            UpdateStatus("Launching programs...", false);
+
+            // Connect to vpn
+            UpdateStatus("Connecting to VPN...", false);
+            var vpnConnected = ConnectToVpn();
+            if (vpnConnected)
+                UpdateStatus("Connected to VPN.", true, true);
+            else
+                UpdateStatus("Failed to connect to VPN.", true, false);
+
+            // Launch slack
+            UpdateStatus("Launching Slack...", false);
+            var slackLaunched = LaunchSlack();
+            if (slackLaunched)
+                UpdateStatus("Slack launched.", true, true);
+            else
+                UpdateStatus("Slack failed to launch.", true, false);
+
+            // Launch outlook
+            UpdateStatus("Launching Outlook...", false);
+            var outlookLaunched = LaunchOutlook();
+            if (outlookLaunched)
+                UpdateStatus("Outlook launched.", true, true);
+            else
+                UpdateStatus("Outlook failed to launch.", true, false);
+
+
+            // Launch chrome website(s)
+            var websitesLaunched = LaunchChromeWebsites();
+            if (websitesLaunched)
+                UpdateStatus("All website(s) launched.", true, true);
+            else
+                UpdateStatus("Failed to launch website(s).", true, false);
+
+            // Launch spotify
+            var spotifyLaunched = LaunchSpotify();
+            if (spotifyLaunched)
+                UpdateStatus("Spotify launched.", true, true);
+            else
+                UpdateStatus("Spotify failed to launch.", true, false);
+
+            // Launch terminal
+            var terminalLaunched = LaunchWindowsTerminal();
+            if (terminalLaunched)
+                UpdateStatus("Windows terminal launched.", true, true);
+            else
+                UpdateStatus("Windows terminal failed to launch.", true, false);
+
+            // Resizing Slack window
+            var resizedSlack = ResizeWindowRightHalfTopVertical(Programs.Slack);
+            if (resizedSlack)
+                UpdateStatus("Slack window resized.", true, true);
+            else
+                UpdateStatus("Failed to resize Slack.", true, false);
+
+            // Resizing Outlook window
+            var resizedOutlook = ResizeWindowRightHalfBottomVertical(Programs.Outlook);
+            if (resizedOutlook)
+                UpdateStatus("Outlook window resized.", true, true);
+            else
+                UpdateStatus("Failed to resize Outlook.", true, false);
+
+            // Resizing Chrome window
+            var resizedChrome = ResizeWindowLeftMaximizedVertical(Programs.Chrome);
+            if (resizedChrome)
+                UpdateStatus("Chrome window resized.", true, true);
+            else
+                UpdateStatus("Failed to resize Chrome.", true, false);
+
         }
 
         private void OnDelTempAspFilesClick(object sender, RoutedEventArgs e)
         {
-            var tempFiles = "C:\\Users\\joshv\\AppData\\Local\\Temp\\Temporary ASP.NET Files";
-            StatusListBox.Items.Add("Deleting Temporary ASP.NET Files...");
+            var tempFiles = @"C:\Users\joshv\AppData\Local\Temp\Temporary ASP.NET Files";
+            UpdateStatus("Deleting Temporary ASP.NET Files...", false);
+            try
+            {
+                ProcessCommands.DeleteDirectory(tempFiles);
+                UpdateStatus("Temporary ASP.NET Files deleted.", true, true);
+            }
+            catch(Exception ex)
+            {
+                UpdateStatus("Failed to delete Temporary ASP.NET Files.", true, false);
+                Debug.WriteLine("Error: " + ex);
+            }
         }
     }
 }

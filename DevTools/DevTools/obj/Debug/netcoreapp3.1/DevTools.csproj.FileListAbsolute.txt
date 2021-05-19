@@ -1,3 +1,9 @@
+D:\Repository\PandellDevTools\DevTools\DevTools\obj\Debug\netcoreapp3.1\DevTools.csprojAssemblyReference.cache
+D:\Repository\PandellDevTools\DevTools\DevTools\obj\Debug\netcoreapp3.1\MainWindow.g.cs
+D:\Repository\PandellDevTools\DevTools\DevTools\obj\Debug\netcoreapp3.1\PrGenerator.g.cs
+D:\Repository\PandellDevTools\DevTools\DevTools\obj\Debug\netcoreapp3.1\App.g.cs
+D:\Repository\PandellDevTools\DevTools\DevTools\obj\Debug\netcoreapp3.1\DevTools_MarkupCompile.cache
+D:\Repository\PandellDevTools\DevTools\DevTools\obj\Debug\netcoreapp3.1\DevTools_MarkupCompile.lref
 D:\Repository\PandellDevTools\DevTools\DevTools\bin\Debug\netcoreapp3.1\DevTools.exe
 D:\Repository\PandellDevTools\DevTools\DevTools\bin\Debug\netcoreapp3.1\DevTools.deps.json
 D:\Repository\PandellDevTools\DevTools\DevTools\bin\Debug\netcoreapp3.1\DevTools.runtimeconfig.json
@@ -5,11 +11,6 @@ D:\Repository\PandellDevTools\DevTools\DevTools\bin\Debug\netcoreapp3.1\DevTools
 D:\Repository\PandellDevTools\DevTools\DevTools\bin\Debug\netcoreapp3.1\DevTools.dll
 D:\Repository\PandellDevTools\DevTools\DevTools\bin\Debug\netcoreapp3.1\DevTools.pdb
 D:\Repository\PandellDevTools\DevTools\DevTools\bin\Debug\netcoreapp3.1\System.Management.Automation.dll
-D:\Repository\PandellDevTools\DevTools\DevTools\obj\Debug\netcoreapp3.1\MainWindow.g.cs
-D:\Repository\PandellDevTools\DevTools\DevTools\obj\Debug\netcoreapp3.1\PrGenerator.g.cs
-D:\Repository\PandellDevTools\DevTools\DevTools\obj\Debug\netcoreapp3.1\App.g.cs
-D:\Repository\PandellDevTools\DevTools\DevTools\obj\Debug\netcoreapp3.1\DevTools_MarkupCompile.cache
-D:\Repository\PandellDevTools\DevTools\DevTools\obj\Debug\netcoreapp3.1\DevTools_MarkupCompile.lref
 D:\Repository\PandellDevTools\DevTools\DevTools\obj\Debug\netcoreapp3.1\MainWindow.baml
 D:\Repository\PandellDevTools\DevTools\DevTools\obj\Debug\netcoreapp3.1\PrGenerator.baml
 D:\Repository\PandellDevTools\DevTools\DevTools\obj\Debug\netcoreapp3.1\DevTools.g.resources

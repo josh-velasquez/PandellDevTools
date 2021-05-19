@@ -6,39 +6,39 @@
         xmlns:local="clr-namespace:DevTools"
         mc:Ignorable="d"
         Title="Pull Request Generator" Height="458" Width="782">
-    <Grid Background="#FFE07A5F">
-        <TextBox x:Name="JiraNumberTextBox" HorizontalAlignment="Left" Height="26" Margin="94,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="113" VerticalContentAlignment="Center" Background="#FFF2CC8F"/>
-        <TextBox x:Name="JiraDescriptionTextBox" HorizontalAlignment="Left" Height="267" Margin="10,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="370" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Background="#FFF2CC8F"/>
-        <TextBox x:Name="BodyTextBox" HorizontalAlignment="Left" Height="267" Margin="385,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="370" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Background="#FFF2CC8F"/>
-        <Label Content="JIRA Number" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.026,-0.577" Foreground="#FFF4F1DE"/>
-        <Label Content="JIRA Description" HorizontalAlignment="Left" Margin="10,111,0,0" VerticalAlignment="Top" Width="101" Foreground="#FFF4F1DE"/>
-        <Label Content="Body" HorizontalAlignment="Left" Margin="385,111,0,0" VerticalAlignment="Top" Width="48" Foreground="#FFF4F1DE"/>
-        <Button Content="Generate" HorizontalAlignment="Left" Margin="212,10,0,0" VerticalAlignment="Top" Width="137" Height="26" Click="OnGenerateClick" Background="#FF81B29A" Foreground="#FFF4F1DE" >
+    <Grid Background="#FF264653">
+        <TextBox x:Name="JiraNumberTextBox" HorizontalAlignment="Left" Height="26" Margin="94,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="113" VerticalContentAlignment="Center" Background="#FF2A9D8F"/>
+        <TextBox x:Name="JiraDescriptionTextBox" HorizontalAlignment="Left" Height="267" Margin="10,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="370" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Background="#FF2A9D8F"/>
+        <TextBox x:Name="BodyTextBox" HorizontalAlignment="Left" Height="267" Margin="385,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="370" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Background="#FF2A9D8F"/>
+        <Label Content="JIRA Number" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.026,-0.577" Foreground="White"/>
+        <Label Content="JIRA Description" HorizontalAlignment="Left" Margin="10,111,0,0" VerticalAlignment="Top" Width="101" Foreground="White"/>
+        <Label Content="Body" HorizontalAlignment="Left" Margin="385,111,0,0" VerticalAlignment="Top" Width="48" Foreground="White"/>
+        <Button Content="Generate" HorizontalAlignment="Left" Margin="212,10,0,0" VerticalAlignment="Top" Width="137" Height="26" Click="OnGenerateClick" Background="#FFE9C46A" Foreground="Black" >
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="4" />
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Content="Copy Body" HorizontalAlignment="Left" Margin="660,45,0,0" VerticalAlignment="Top" Width="95" Height="26" Click="OnCopyBodyClick" Background="#FF99D98C" Foreground="#FFF4F1DE" >
+        <Button Content="Copy Body" HorizontalAlignment="Left" Margin="660,45,0,0" VerticalAlignment="Top" Width="95" Height="26" Click="OnCopyBodyClick" Background="#FFE9C46A" Foreground="Black" >
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4" />
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Content="Clear" HorizontalAlignment="Left" Margin="354,10,0,0" VerticalAlignment="Top" Width="137" Height="26" Click="OnClearClick" Background="#FFCB2828" Foreground="#FFF4F1DE" >
+        <Button Content="Clear" HorizontalAlignment="Left" Margin="354,10,0,0" VerticalAlignment="Top" Width="137" Height="26" Click="OnClearClick" Background="#FFCB2828" Foreground="Black" >
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4" />
                 </Style>
             </Button.Resources>
         </Button>
-        <TextBox x:Name="TitleTextBox" HorizontalAlignment="Left" Height="30" Margin="385,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="370" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Background="#FFF2CC8F" />
-        <Label Content="Title" HorizontalAlignment="Left" Margin="385,45,0,0" VerticalAlignment="Top" Width="48" Foreground="#FFF4F1DE"/>
-        <TextBox x:Name="JiraHeaderTextBox" HorizontalAlignment="Left" Height="30" Margin="10,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="370" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Background="#FFF2CC8F" />
-        <Label Content="Jira Header" HorizontalAlignment="Left" Margin="10,45,0,0" VerticalAlignment="Top" Width="79" Foreground="#FFF4F1DE"/>
-        <Button Content="Copy Title" HorizontalAlignment="Left" Margin="560,45,0,0" VerticalAlignment="Top" Width="95" Height="26" Click="OnCopyTitleClick" Background="#FF99D98C" Foreground="#FFF4F1DE" >
+        <TextBox x:Name="TitleTextBox" HorizontalAlignment="Left" Height="30" Margin="385,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="370" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Background="#FF2A9D8F" />
+        <Label Content="Title" HorizontalAlignment="Left" Margin="385,45,0,0" VerticalAlignment="Top" Width="48" Foreground="White"/>
+        <TextBox x:Name="JiraHeaderTextBox" HorizontalAlignment="Left" Height="30" Margin="10,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" VerticalContentAlignment="Center" Width="370" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Background="#FF2A9D8F" />
+        <Label Content="Jira Header" HorizontalAlignment="Left" Margin="10,45,0,0" VerticalAlignment="Top" Width="79" Foreground="White"/>
+        <Button Content="Copy Title" HorizontalAlignment="Left" Margin="560,45,0,0" VerticalAlignment="Top" Width="95" Height="26" Click="OnCopyTitleClick" Background="#FFE9C46A" Foreground="Black" >
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4" />
