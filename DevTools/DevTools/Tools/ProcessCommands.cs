@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
 
 namespace DevTools.Tools
 {
@@ -29,6 +30,25 @@ namespace DevTools.Tools
                 Debug.WriteLine("Failed to run command: " + command + "\nError: " + e);
             }
         }
+
+        public static void RunCommands(string terminal, string[] commands)
+        {
+            StringBuilder commandsPipe = new StringBuilder();
+            try
+            {
+                for (int i = 0; i < commands.Length-1; i++)
+                {
+                    commandsPipe.Append(commands[i] + " && ");
+                }
+                commandsPipe.Append(commands[commands.Length -1]);
+                Process.Start(terminal, commandsPipe.ToString());
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Failed to run commands.\nError: " + e);
+            }
+        }
+    
 
         public static void DeleteDirectory(string path)
         {

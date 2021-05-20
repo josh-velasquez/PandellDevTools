@@ -47,7 +47,28 @@ namespace DevTools
 
         private void OnClobberClick(object sender, RoutedEventArgs e)
         {
-            StatusListBox.Items.Add("Clobbering files...");
+            try
+            {
+                string[] commands = { @"cd D:\Repository\PandellDevTools", @"mkdir testing" };
+                ProcessCommands.RunCommands("", commands);
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine("ERROR: " + ex);
+            }
+            //StatusListBox.Items.Add("Clobbering files...");
+            //var targetRepoPath = Path.Combine(SrcDirTextBox.Text);
+            //UpdateStatus("Clobbering files...", false);
+            //try
+            //{
+            //    ProcessCommands.RunCommand(targetRepoPath);
+            //    UpdateStatus("Dev tool started.", true, true);
+            //}
+            //catch (Exception ex)
+            //{
+            //    UpdateStatus("Dev tool started.", true, true);
+            //    Debug.WriteLine("Error: " + ex);
+            //}
         }
 
         private void OnBuildStartServerClick(object sender, RoutedEventArgs e)
@@ -257,7 +278,6 @@ namespace DevTools
             else
                 UpdateStatus("Outlook failed to launch.", true, false);
 
-
             // Launch chrome website(s)
             var websitesLaunched = LaunchChromeWebsites();
             if (websitesLaunched)
@@ -316,6 +336,30 @@ namespace DevTools
                 UpdateStatus("Failed to delete Temporary ASP.NET Files.", true, false);
                 Debug.WriteLine("Error: " + ex);
             }
+        }
+
+        private void OnFixWindowsClick(object sender, RoutedEventArgs e)
+        {
+            // Resizing Slack window
+            var resizedSlack = ResizeWindowRightHalfTopVertical(Programs.Slack);
+            if (resizedSlack)
+                UpdateStatus("Slack window resized.", true, true);
+            else
+                UpdateStatus("Failed to resize Slack.", true, false);
+
+            // Resizing Outlook window
+            var resizedOutlook = ResizeWindowRightHalfBottomVertical(Programs.Outlook);
+            if (resizedOutlook)
+                UpdateStatus("Outlook window resized.", true, true);
+            else
+                UpdateStatus("Failed to resize Outlook.", true, false);
+
+            // Resizing Chrome window
+            var resizedChrome = ResizeWindowLeftMaximizedVertical(Programs.Chrome);
+            if (resizedChrome)
+                UpdateStatus("Chrome window resized.", true, true);
+            else
+                UpdateStatus("Failed to resize Chrome.", true, false);
         }
     }
 }

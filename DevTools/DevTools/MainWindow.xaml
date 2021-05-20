@@ -30,7 +30,7 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Button  HorizontalAlignment="Left" Margin="154,72,0,0" VerticalAlignment="Top" Width="148" Height="88" Background="#FFE76F51" Foreground="#FFF4F1DE" Click="OnLaunchClick" >
+        <Button  HorizontalAlignment="Left" Margin="154,103,0,0" VerticalAlignment="Top" Width="148" Height="57" Background="#FFE76F51" Foreground="#FFF4F1DE" Click="OnLaunchClick" >
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4" />
@@ -55,5 +55,13 @@
                 </Style>
             </Button.Resources>
         </Button>
+        <Button Content="Fix Windows" HorizontalAlignment="Left" Margin="154,72,0,0" VerticalAlignment="Top" Width="148" Height="26" Background="#FFE9C46A" Foreground="Black" Click="OnFixWindowsClick" >
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="4" />
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button Content="Home Time" HorizontalAlignment="Left" Height="31" Margin="129,165,0,0" VerticalAlignment="Top" Width="119"/>
     </Grid>
 </Window>

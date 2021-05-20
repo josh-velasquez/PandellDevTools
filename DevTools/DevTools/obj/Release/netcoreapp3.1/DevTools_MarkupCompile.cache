@@ -1,20 +1,20 @@
 ﻿DevTools
-1.0.0.0
+
 
 winexe
 C#
 .cs
-D:\Repository\PandellDevTools\DevTools\DevTools\obj\Debug\netcoreapp3.1\
+D:\Repository\PandellDevTools\DevTools\DevTools\obj\Release\netcoreapp3.1\
 DevTools
 none
 false
-TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1;
+TRACE;RELEASE;NETCOREAPP;NETCOREAPP3_1;
 D:\Repository\PandellDevTools\DevTools\DevTools\App.xaml
 2-1551943410
 
-1076125410
+8286787440
 193-1967893015
 MainWindow.xaml;PrGenerator.xaml;
 
-True
+False
 
