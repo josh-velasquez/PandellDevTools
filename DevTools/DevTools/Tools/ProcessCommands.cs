@@ -36,11 +36,11 @@ namespace DevTools.Tools
             StringBuilder commandsPipe = new StringBuilder();
             try
             {
-                for (int i = 0; i < commands.Length-1; i++)
+                for (int i = 0; i < commands.Length - 1; i++)
                 {
                     commandsPipe.Append(commands[i] + " && ");
                 }
-                commandsPipe.Append(commands[commands.Length -1]);
+                commandsPipe.Append(commands[commands.Length - 1]);
                 Process.Start(terminal, commandsPipe.ToString());
             }
             catch (Exception e)
@@ -48,7 +48,7 @@ namespace DevTools.Tools
                 Debug.WriteLine("Failed to run commands.\nError: " + e);
             }
         }
-    
+
 
         public static void DeleteDirectory(string path)
         {

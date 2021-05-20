@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DevTools"
         mc:Ignorable="d"
-        Title="Pull Request Generator" Height="458" Width="782" Background="#FF264653">
-    <Grid>
+        Title="Pull Request Generator" Height="458" Width="782">
+    <Grid Background="#FF264653">
         <TextBox x:Name="JiraNumberTextBox" HorizontalAlignment="Left" Height="26" Margin="94,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="113" VerticalContentAlignment="Center" Background="#FF2A9D8F"/>
         <TextBox x:Name="JiraDescriptionTextBox" HorizontalAlignment="Left" Height="267" Margin="10,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="370" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Background="#FF2A9D8F"/>
         <TextBox x:Name="BodyTextBox" HorizontalAlignment="Left" Height="267" Margin="385,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="370" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Background="#FF2A9D8F"/>

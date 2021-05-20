@@ -1,0 +1,17 @@
+D:\Repository\PandellDevTools\DevTools\DevTools\bin\Release\DevTools.exe.config
+D:\Repository\PandellDevTools\DevTools\DevTools\bin\Release\DevTools.exe
+D:\Repository\PandellDevTools\DevTools\DevTools\bin\Release\DevTools.pdb
+D:\Repository\PandellDevTools\DevTools\DevTools\obj\Release\MainWindow.g.cs
+D:\Repository\PandellDevTools\DevTools\DevTools\obj\Release\PrGenerator.g.cs
+D:\Repository\PandellDevTools\DevTools\DevTools\obj\Release\App.g.cs
+D:\Repository\PandellDevTools\DevTools\DevTools\obj\Release\DevTools_MarkupCompile.cache
+D:\Repository\PandellDevTools\DevTools\DevTools\obj\Release\DevTools_MarkupCompile.lref
+D:\Repository\PandellDevTools\DevTools\DevTools\obj\Release\MainWindow.baml
+D:\Repository\PandellDevTools\DevTools\DevTools\obj\Release\PrGenerator.baml
+D:\Repository\PandellDevTools\DevTools\DevTools\obj\Release\DevTools.g.resources
+D:\Repository\PandellDevTools\DevTools\DevTools\obj\Release\DevTools.Properties.Resources.resources
+D:\Repository\PandellDevTools\DevTools\DevTools\obj\Release\DevTools.csproj.GenerateResource.cache
+D:\Repository\PandellDevTools\DevTools\DevTools\obj\Release\DevTools.csproj.CoreCompileInputs.cache
+D:\Repository\PandellDevTools\DevTools\DevTools\obj\Release\DevTools.exe
+D:\Repository\PandellDevTools\DevTools\DevTools\obj\Release\DevTools.pdb
+D:\Repository\PandellDevTools\DevTools\DevTools\obj\Release\DevTools.csprojAssemblyReference.cache

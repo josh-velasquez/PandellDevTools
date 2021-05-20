@@ -25,7 +25,7 @@ namespace DevTools.Tools
 
         [DllImport("user32.dll")]
         private static extern bool SetCursorPos(int X, int Y);
-        
+
         [DllImport("user32.dll")]
         private static extern void mouse_event(
                UInt32 dwFlags, // motion and click options

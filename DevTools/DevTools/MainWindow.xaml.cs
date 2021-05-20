@@ -7,7 +7,6 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using static DevTools.Tools.WindowCommands;
 
 namespace DevTools
 {
@@ -30,7 +29,6 @@ namespace DevTools
 
         int HORIZONTAL_SCREEN_WIDTH = (int)SystemParameters.PrimaryScreenWidth;
         int HORIZONTAL_SCREEN_HEIGHT = (int)SystemParameters.PrimaryScreenHeight;
-
         public MainWindow()
         {
             InitializeComponent();
@@ -52,7 +50,7 @@ namespace DevTools
                 string[] commands = { @"cd D:\Repository\PandellDevTools", @"mkdir testing" };
                 ProcessCommands.RunCommands("", commands);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Debug.WriteLine("ERROR: " + ex);
             }
@@ -113,7 +111,7 @@ namespace DevTools
                 // close tray
                 MouseCommands.MoveAndClick(2351, (1440 - 16));
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Debug.WriteLine("Error: " + e);
                 return false;
@@ -193,13 +191,28 @@ namespace DevTools
             }
             return true;
         }
-        
-        private bool ResizeWindowRightHalfTopVertical(Programs targetWindow) {
+
+        private bool ResizeWindowRightHalfTopVertical(Programs targetWindow)
+        {
             try
             {
                 WindowCommands.ResizeWindowRightHalfTopVertical(targetWindow, HORIZONTAL_SCREEN_WIDTH, HORIZONTAL_SCREEN_HEIGHT);
             }
-            catch(Exception e)
+            catch (Exception e)
+            {
+                Debug.WriteLine("Error: " + e);
+                return false;
+            }
+            return true;
+        }
+
+        private bool ResizeWindowCenterFullHorizontal(Programs targetWindow)
+        {
+            try
+            {
+                WindowCommands.ResizeWindowCenterFullHorizontal(targetWindow, HORIZONTAL_SCREEN_WIDTH);
+            }
+            catch (Exception e)
             {
                 Debug.WriteLine("Error: " + e);
                 return false;
@@ -225,7 +238,7 @@ namespace DevTools
         {
             try
             {
-                WindowCommands.ResizeWindowLeftMaximizedVertical(targetWindow);
+                WindowCommands.ResizeWindowLeftMaximizedVertical(targetWindow, HORIZONTAL_SCREEN_WIDTH);
             }
             catch (Exception e)
             {
@@ -314,11 +327,18 @@ namespace DevTools
                 UpdateStatus("Failed to resize Outlook.", true, false);
 
             // Resizing Chrome window
-            var resizedChrome = ResizeWindowLeftMaximizedVertical(Programs.Chrome);
+            var resizedChrome = ResizeWindowCenterFullHorizontal(Programs.Chrome);
             if (resizedChrome)
                 UpdateStatus("Chrome window resized.", true, true);
             else
                 UpdateStatus("Failed to resize Chrome.", true, false);
+
+            // Resizing Spotify window
+            var resizedSpotify = ResizeWindowLeftMaximizedVertical(Programs.Spotify);
+            if (resizedSpotify)
+                UpdateStatus("Spotify window resized.", true, true);
+            else
+                UpdateStatus("Failed to resize Spotify.", true, false);
 
         }
 
@@ -331,7 +351,7 @@ namespace DevTools
                 ProcessCommands.DeleteDirectory(tempFiles);
                 UpdateStatus("Temporary ASP.NET Files deleted.", true, true);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 UpdateStatus("Failed to delete Temporary ASP.NET Files.", true, false);
                 Debug.WriteLine("Error: " + ex);
@@ -360,6 +380,11 @@ namespace DevTools
                 UpdateStatus("Chrome window resized.", true, true);
             else
                 UpdateStatus("Failed to resize Chrome.", true, false);
+        }
+
+        private void OnHomeTimeClick(object sender, RoutedEventArgs e)
+        {
+            // Close programs
         }
     }
 }

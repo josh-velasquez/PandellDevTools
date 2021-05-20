@@ -13,6 +13,7 @@ namespace DevTools
         {
             InitializeComponent();
         }
+
         const string ROOT_URL = "https://pandell.atlassian.net/browse/LRW-";
 
         private void OnGenerateClick(object sender, RoutedEventArgs e)

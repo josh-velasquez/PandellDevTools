@@ -15,13 +15,9 @@ namespace DevTools.Tools
         public static void ResizeWindowRightHalfTopVertical(Programs targetWindow, int windowHeight, int windowWidth)
         {
             string programName = GetDescription(targetWindow);
-            Process process = Process.GetProcessesByName(programName)[0];
-            IntPtr handle = process.MainWindowHandle;
-            WindowPositioning windowPositioning = new WindowPositioning();
-            if (GetWindowRect(handle, ref windowPositioning))
-            {
-                MoveWindow(handle, windowHeight, -300, windowWidth, (windowHeight / 2) - 15, true);
-            }
+            int y = -300;
+            int height = (windowWidth / 2) - 15; // Divide window size by 2 and subtract task bar height
+            MoveWindow(programName, windowHeight, y, windowWidth, height);
         }
 
         // Vertical orientation monitor
@@ -30,26 +26,50 @@ namespace DevTools.Tools
         public static void ResizeWindowRightHalfBottomVertical(Programs targetWindow, int windowHeight, int windowWidth)
         {
             string programName = GetDescription(targetWindow);
+            int y = 965;
+            int height = (windowWidth / 2) - 15; // Divide window size by 2 and subtract task bar height
+            MoveWindow(programName, windowHeight, y, windowWidth, height);
+        }
+
+        public static void ResizeWindowCenterFullHorizontal(Programs targetWindow, int horizontalWidth)
+        {
+            string programName = GetDescription(targetWindow);
+            int y = 0;
+            int width = 1;
+            int height = 1;
+            MoveWindow(programName, horizontalWidth, y, width, height);
+            MaximizeWindow(programName);
+        }
+
+        public static void ResizeWindowLeftMaximizedVertical(Programs targetWindow, int horizontalWidth)
+        {
+            string programName = GetDescription(targetWindow);
+            int x = horizontalWidth - 1;
+            int y = 0;
+            int width = 1;
+            int height = 1;
+            MoveWindow(programName, x, y, width, height);
+            MaximizeWindow(programName);
+        }
+
+        private static void MoveWindow(string programName, int x, int y, int width, int height, bool repaint = true)
+        {
             Process process = Process.GetProcessesByName(programName)[0];
             IntPtr handle = process.MainWindowHandle;
             WindowPositioning windowPositioning = new WindowPositioning();
             if (GetWindowRect(handle, ref windowPositioning))
             {
-                MoveWindow(handle, windowHeight, 965, windowWidth, (windowWidth / 2) - 15, true);
+                MoveWindow(handle, x, y, width, height, repaint);
             }
         }
 
-        public static void ResizeWindowLeftMaximizedVertical(Programs targetWindow)
+        private static void MaximizeWindow(string programName)
         {
-            string programName = GetDescription(targetWindow);
             Process process = Process.GetProcessesByName(programName)[0];
             IntPtr handle = process.MainWindowHandle;
             WindowPositioning windowPositioning = new WindowPositioning();
             if (GetWindowRect(handle, ref windowPositioning))
             {
-                // Move to the left
-                MoveWindow(handle, -2000, 0, windowPositioning.right, windowPositioning.top, true);
-                // Maximize window
                 ShowWindow(handle, SW_SHOWMAXIMIZED);
             }
         }
@@ -69,7 +89,6 @@ namespace DevTools.Tools
             public int right;
             public int bottom;
         }
-
 
         // Maximizing window
         private const int SW_SHOWNORMAL = 1;
