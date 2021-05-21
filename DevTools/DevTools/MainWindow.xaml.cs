@@ -48,14 +48,18 @@ namespace DevTools
         private void OnClobberClick(object sender, RoutedEventArgs e)
         {
             UpdateStatus("Clobbering files...", false);
-            var targetRepoPath = Path.Combine(SrcDirTextBox.Text);
-            var command = "yarn clobber";
-
-
-
             try
             {
-                //ProcessCommands.DeleteDirectory(TEM)
+                var targetRepoPath = SrcDirTextBox.Text;
+                Process process = new Process();
+                process.StartInfo.WorkingDirectory = targetRepoPath;
+                process.StartInfo.FileName = WINDOWSTERMINAL_PATH;
+                //process.StartInfo.RedirectStandardOutput = true;
+                process.StartInfo.Arguments = "mdkir testing";
+                process.Start();
+                //string output = process.StandardOutput.ReadToEnd();
+                //Debug.WriteLine("OUTPUT: " + output);
+                process.WaitForExit();
             }
             catch (Exception ex)
             {
