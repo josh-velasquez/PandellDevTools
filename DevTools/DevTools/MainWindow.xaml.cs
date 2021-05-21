@@ -20,6 +20,7 @@ namespace DevTools
         const string SPOTIFY_PATH = @"C:\Users\joshv\AppData\Roaming\Spotify\Spotify.exe";
         const string WINDOWSTERMINAL_PATH = @"C:\Users\joshv\AppData\Local\Microsoft\WindowsApps\wt.exe";
         const string CHROME_PATH = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
+        const string TEMP_ASP_FILES = @"C:\Users\joshv\AppData\Local\Temp\Temporary ASP.NET Files";
         IDictionary<string, string> WEBSITES = new Dictionary<string, string>(){
             {"GitHub", "https://github.com/pandell/LandRiteWeb"},
             {"TeamCity", "https://build.pandell.com/"},
@@ -47,8 +48,7 @@ namespace DevTools
         {
             try
             {
-                string[] commands = { @"cd D:\Repository\PandellDevTools", @"mkdir testing" };
-                ProcessCommands.RunCommands("", commands);
+                //ProcessCommands.DeleteDirectory(TEM)
             }
             catch (Exception ex)
             {
@@ -83,7 +83,7 @@ namespace DevTools
             UpdateStatus("Launching Dev Tool...", false);
             try
             {
-                ProcessCommands.RunCommand(devToolPath);
+                ProcessCommands.RunCommandWindowsTerminal(WINDOWSTERMINAL_PATH, devToolPath);
                 UpdateStatus("Dev tool started.", true, true);
             }
             catch (Exception ex)
@@ -192,11 +192,12 @@ namespace DevTools
             return true;
         }
 
-        private bool ResizeWindowRightHalfTopVertical(Programs targetWindow)
+        private bool LaunchIncognitoBrowser()
         {
             try
             {
-                WindowCommands.ResizeWindowRightHalfTopVertical(targetWindow, HORIZONTAL_SCREEN_WIDTH, HORIZONTAL_SCREEN_HEIGHT);
+                var args = "google.com -incognito";
+                ProcessCommands.RunCommand(CHROME_PATH, args);
             }
             catch (Exception e)
             {
@@ -204,151 +205,133 @@ namespace DevTools
                 return false;
             }
             return true;
+        }
+
+        private bool ResizeWindowRightHalfTopVertical(Programs targetWindow)
+        {
+            return WindowCommands.ResizeWindowRightHalfTopVertical(targetWindow, HORIZONTAL_SCREEN_WIDTH, HORIZONTAL_SCREEN_HEIGHT);
         }
 
         private bool ResizeWindowCenterFullHorizontal(Programs targetWindow)
         {
-            try
-            {
-                WindowCommands.ResizeWindowCenterFullHorizontal(targetWindow, HORIZONTAL_SCREEN_WIDTH);
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine("Error: " + e);
-                return false;
-            }
-            return true;
+            return WindowCommands.ResizeWindowCenterFullHorizontal(targetWindow);
         }
 
         private bool ResizeWindowRightHalfBottomVertical(Programs targetWindow)
         {
-            try
-            {
-                WindowCommands.ResizeWindowRightHalfBottomVertical(targetWindow, HORIZONTAL_SCREEN_WIDTH, HORIZONTAL_SCREEN_HEIGHT);
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine("Error: " + e);
-                return false;
-            }
-            return true;
+            return WindowCommands.ResizeWindowRightHalfBottomVertical(targetWindow, HORIZONTAL_SCREEN_WIDTH, HORIZONTAL_SCREEN_HEIGHT);
         }
 
         private bool ResizeWindowLeftMaximizedVertical(Programs targetWindow)
         {
-            try
-            {
-                WindowCommands.ResizeWindowLeftMaximizedVertical(targetWindow, HORIZONTAL_SCREEN_WIDTH);
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine("Error: " + e);
-                return false;
-            }
-            return true;
+            return WindowCommands.ResizeWindowLeftMaximizedVertical(targetWindow);
         }
 
         private void UpdateStatus(string message, bool commandUpdate, bool success = false)
         {
-            if (commandUpdate)
+            Dispatcher.Invoke(() =>
             {
-                if (success)
-                    StatusListBox.Items.Add(new ListBoxItem { Content = message, Background = Brushes.LightGreen });
+                if (commandUpdate)
+                {
+                    if (success)
+                        StatusListBox.Items.Add(new ListBoxItem { Content = message, Background = Brushes.LightGreen });
+                    else
+                        StatusListBox.Items.Add(new ListBoxItem { Content = message, Background = Brushes.Red });
+                }
                 else
-                    StatusListBox.Items.Add(new ListBoxItem { Content = message, Background = Brushes.Red });
-            }
-            else
-            {
-                StatusListBox.Items.Add(new ListBoxItem { Content = message, Background = Brushes.Gray });
-            }
+                {
+                    StatusListBox.Items.Add(new ListBoxItem { Content = message, Background = Brushes.Gray });
+                }
+            });
         }
 
         private void OnLaunchClick(object sender, RoutedEventArgs e)
         {
-            UpdateStatus("Launching programs...", false);
+            new Thread(() =>
+            {
+                UpdateStatus("Launching programs...", false);
 
-            // Connect to vpn
-            UpdateStatus("Connecting to VPN...", false);
-            var vpnConnected = ConnectToVpn();
-            if (vpnConnected)
-                UpdateStatus("Connected to VPN.", true, true);
-            else
-                UpdateStatus("Failed to connect to VPN.", true, false);
+                // Connect to vpn
+                UpdateStatus("Connecting to VPN...", false);
+                var vpnConnected = ConnectToVpn();
+                if (vpnConnected)
+                    UpdateStatus("Connected to VPN.", true, true);
+                else
+                    UpdateStatus("Failed to connect to VPN.", true, false);
 
-            // Launch slack
-            UpdateStatus("Launching Slack...", false);
-            var slackLaunched = LaunchSlack();
-            if (slackLaunched)
-                UpdateStatus("Slack launched.", true, true);
-            else
-                UpdateStatus("Slack failed to launch.", true, false);
+                // Launch slack
+                UpdateStatus("Launching Slack...", false);
+                var slackLaunched = LaunchSlack();
+                if (slackLaunched)
+                    UpdateStatus("Slack launched.", true, true);
+                else
+                    UpdateStatus("Slack failed to launch.", true, false);
 
-            // Launch outlook
-            UpdateStatus("Launching Outlook...", false);
-            var outlookLaunched = LaunchOutlook();
-            if (outlookLaunched)
-                UpdateStatus("Outlook launched.", true, true);
-            else
-                UpdateStatus("Outlook failed to launch.", true, false);
+                // Launch outlook
+                UpdateStatus("Launching Outlook...", false);
+                var outlookLaunched = LaunchOutlook();
+                if (outlookLaunched)
+                    UpdateStatus("Outlook launched.", true, true);
+                else
+                    UpdateStatus("Outlook failed to launch.", true, false);
 
-            // Launch chrome website(s)
-            var websitesLaunched = LaunchChromeWebsites();
-            if (websitesLaunched)
-                UpdateStatus("All website(s) launched.", true, true);
-            else
-                UpdateStatus("Failed to launch website(s).", true, false);
+                // Launch chrome website(s)
+                var websitesLaunched = LaunchChromeWebsites();
+                if (websitesLaunched)
+                    UpdateStatus("All website(s) launched.", true, true);
+                else
+                    UpdateStatus("Failed to launch website(s).", true, false);
 
-            // Launch spotify
-            var spotifyLaunched = LaunchSpotify();
-            if (spotifyLaunched)
-                UpdateStatus("Spotify launched.", true, true);
-            else
-                UpdateStatus("Spotify failed to launch.", true, false);
+                // Launch spotify
+                var spotifyLaunched = LaunchSpotify();
+                if (spotifyLaunched)
+                    UpdateStatus("Spotify launched.", true, true);
+                else
+                    UpdateStatus("Spotify failed to launch.", true, false);
 
-            // Launch terminal
-            var terminalLaunched = LaunchWindowsTerminal();
-            if (terminalLaunched)
-                UpdateStatus("Windows terminal launched.", true, true);
-            else
-                UpdateStatus("Windows terminal failed to launch.", true, false);
+                // Launch terminal
+                var terminalLaunched = LaunchWindowsTerminal();
+                if (terminalLaunched)
+                    UpdateStatus("Windows terminal launched.", true, true);
+                else
+                    UpdateStatus("Windows terminal failed to launch.", true, false);
 
-            // Resizing Slack window
-            var resizedSlack = ResizeWindowRightHalfTopVertical(Programs.Slack);
-            if (resizedSlack)
-                UpdateStatus("Slack window resized.", true, true);
-            else
-                UpdateStatus("Failed to resize Slack.", true, false);
+                // Resizing Slack window
+                var resizedSlack = ResizeWindowRightHalfTopVertical(Programs.Slack);
+                if (resizedSlack)
+                    UpdateStatus("Slack window resized.", true, true);
+                else
+                    UpdateStatus("Failed to resize Slack.", true, false);
 
-            // Resizing Outlook window
-            var resizedOutlook = ResizeWindowRightHalfBottomVertical(Programs.Outlook);
-            if (resizedOutlook)
-                UpdateStatus("Outlook window resized.", true, true);
-            else
-                UpdateStatus("Failed to resize Outlook.", true, false);
+                // Resizing Outlook window
+                var resizedOutlook = ResizeWindowRightHalfBottomVertical(Programs.Outlook);
+                if (resizedOutlook)
+                    UpdateStatus("Outlook window resized.", true, true);
+                else
+                    UpdateStatus("Failed to resize Outlook.", true, false);
 
-            // Resizing Chrome window
-            var resizedChrome = ResizeWindowCenterFullHorizontal(Programs.Chrome);
-            if (resizedChrome)
-                UpdateStatus("Chrome window resized.", true, true);
-            else
-                UpdateStatus("Failed to resize Chrome.", true, false);
+                // Resizing Chrome window
+                var resizedChrome = ResizeWindowCenterFullHorizontal(Programs.Chrome);
+                if (resizedChrome)
+                    UpdateStatus("Chrome window resized.", true, true);
+                else
+                    UpdateStatus("Failed to resize Chrome.", true, false);
 
-            // Resizing Spotify window
-            var resizedSpotify = ResizeWindowLeftMaximizedVertical(Programs.Spotify);
-            if (resizedSpotify)
-                UpdateStatus("Spotify window resized.", true, true);
-            else
-                UpdateStatus("Failed to resize Spotify.", true, false);
-
+                // Resizing Spotify window
+                var resizedSpotify = ResizeWindowLeftMaximizedVertical(Programs.Spotify);
+                if (resizedSpotify)
+                    UpdateStatus("Spotify window resized.", true, true);
+                else
+                    UpdateStatus("Failed to resize Spotify.", true, false);
+            }).Start();
         }
 
         private void OnDelTempAspFilesClick(object sender, RoutedEventArgs e)
         {
-            var tempFiles = @"C:\Users\joshv\AppData\Local\Temp\Temporary ASP.NET Files";
             UpdateStatus("Deleting Temporary ASP.NET Files...", false);
             try
             {
-                ProcessCommands.DeleteDirectory(tempFiles);
+                ProcessCommands.DeleteDirectory(TEMP_ASP_FILES);
                 UpdateStatus("Temporary ASP.NET Files deleted.", true, true);
             }
             catch (Exception ex)
@@ -360,31 +343,158 @@ namespace DevTools
 
         private void OnFixWindowsClick(object sender, RoutedEventArgs e)
         {
-            // Resizing Slack window
-            var resizedSlack = ResizeWindowRightHalfTopVertical(Programs.Slack);
-            if (resizedSlack)
-                UpdateStatus("Slack window resized.", true, true);
-            else
-                UpdateStatus("Failed to resize Slack.", true, false);
+            new Thread(() =>
+            {
+                // Resizing Slack window
+                var resizedSlack = ResizeWindowRightHalfTopVertical(Programs.Slack);
+                if (resizedSlack)
+                    UpdateStatus("Slack window resized.", true, true);
+                else
+                    UpdateStatus("Failed to resize Slack.", true, false);
 
-            // Resizing Outlook window
-            var resizedOutlook = ResizeWindowRightHalfBottomVertical(Programs.Outlook);
-            if (resizedOutlook)
-                UpdateStatus("Outlook window resized.", true, true);
-            else
-                UpdateStatus("Failed to resize Outlook.", true, false);
+                // Resizing Outlook window
+                var resizedOutlook = ResizeWindowRightHalfBottomVertical(Programs.Outlook);
+                if (resizedOutlook)
+                    UpdateStatus("Outlook window resized.", true, true);
+                else
+                    UpdateStatus("Failed to resize Outlook.", true, false);
 
-            // Resizing Chrome window
-            var resizedChrome = ResizeWindowLeftMaximizedVertical(Programs.Chrome);
-            if (resizedChrome)
-                UpdateStatus("Chrome window resized.", true, true);
-            else
-                UpdateStatus("Failed to resize Chrome.", true, false);
+                // Resizing Chrome window
+                var resizedChrome = ResizeWindowCenterFullHorizontal(Programs.Chrome);
+                if (resizedChrome)
+                    UpdateStatus("Chrome window resized.", true, true);
+                else
+                    UpdateStatus("Failed to resize Chrome.", true, false);
+
+                // Resizing Spotify window
+                var resizedSpotify = ResizeWindowLeftMaximizedVertical(Programs.Spotify);
+                if (resizedSpotify)
+                    UpdateStatus("Spotify window resized.", true, true);
+                else
+                    UpdateStatus("Failed to resize Spotify.", true, false);
+            }).Start();
+        }
+
+        private bool CloseSlack()
+        {
+            try
+            {
+                WindowCommands.CloseWindow(Programs.Slack);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Failed to close Slack: " + e);
+                return false;
+            }
+            return true;
+        }
+
+        private bool CloseOutlook()
+        {
+            try
+            {
+                WindowCommands.CloseWindow(Programs.Outlook);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Failed to close Outlook: " + e);
+                return false;
+            }
+            return true;
+        }
+
+        private bool CloseChrome()
+        {
+            try
+            {
+                WindowCommands.CloseWindow(Programs.Chrome);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Failed to close Chrome: " + e);
+                return false;
+            }
+            return true;
+        }
+
+        private bool CloseSpotify()
+        {
+            try
+            {
+                WindowCommands.CloseWindow(Programs.Spotify);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Failed to close Spotify: " + e);
+                return false;
+            }
+            return true;
+        }
+
+        private bool CloseWindowsTerminal()
+        {
+            try
+            {
+                WindowCommands.CloseWindow(Programs.WindowsTerminal);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Failed to close Windows Terminal: " + e);
+                return false;
+            }
+            return true;
         }
 
         private void OnHomeTimeClick(object sender, RoutedEventArgs e)
         {
-            // Close programs
+            new Thread(() =>
+            {
+                UpdateStatus("Closing programs...", false);
+
+                // Closing Slack
+                var slackClosed = CloseSlack();
+                if (slackClosed)
+                    UpdateStatus("Slack closed.", true, true);
+                else
+                    UpdateStatus("Failed to close Slack.", true, false);
+
+                // Closing Outlook
+                var outlookClosed = CloseOutlook();
+                if (outlookClosed)
+                    UpdateStatus("Outlook closed.", true, true);
+                else
+                    UpdateStatus("Failed to close Outlook.", true, false);
+
+                // Closing Chrome
+                var chromeClosed = CloseChrome();
+                if (chromeClosed)
+                    UpdateStatus("Chrome closed.", true, true);
+                else
+                    UpdateStatus("Failed to close Chrome.", true, false);
+
+                // Closing Spotify
+                var spotifyClosed = CloseSpotify();
+                if (spotifyClosed)
+                    UpdateStatus("Spotify closed.", true, true);
+                else
+                    UpdateStatus("Failed to close Spotify.", true, false);
+
+                // Closing Windows Terminal
+                var wtClosed = CloseWindowsTerminal();
+                if (wtClosed)
+                    UpdateStatus("Windows Terminal closed.", true, true);
+                else
+                    UpdateStatus("Failed to close Windows Terminal.", true, false);
+            }).Start();
+        }
+
+        private void OnIncognitoClick(object sender, RoutedEventArgs e)
+        {
+            var launchedIncognito = LaunchIncognitoBrowser();
+            if (launchedIncognito)
+                UpdateStatus("Incognito browser launched.", true, true);
+            else
+                UpdateStatus("Incognito browser failed to launch.", true, false);
         }
     }
 }

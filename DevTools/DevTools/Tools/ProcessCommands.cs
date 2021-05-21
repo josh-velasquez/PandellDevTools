@@ -49,6 +49,17 @@ namespace DevTools.Tools
             }
         }
 
+        public static void RunCommandWindowsTerminal(string windowsTerminalPath, string command)
+        {
+            try
+            {
+                Process.Start(windowsTerminalPath, command);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Failed to run command: " + command + "\nError: " + e);
+            }
+        }
 
         public static void DeleteDirectory(string path)
         {
