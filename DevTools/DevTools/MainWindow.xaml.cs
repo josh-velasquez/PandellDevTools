@@ -30,6 +30,7 @@ namespace DevTools
 
         int HORIZONTAL_SCREEN_WIDTH = (int)SystemParameters.PrimaryScreenWidth;
         int HORIZONTAL_SCREEN_HEIGHT = (int)SystemParameters.PrimaryScreenHeight;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -46,6 +47,12 @@ namespace DevTools
 
         private void OnClobberClick(object sender, RoutedEventArgs e)
         {
+            UpdateStatus("Clobbering files...", false);
+            var targetRepoPath = Path.Combine(SrcDirTextBox.Text);
+            var command = "yarn clobber";
+
+
+
             try
             {
                 //ProcessCommands.DeleteDirectory(TEM)
@@ -54,9 +61,7 @@ namespace DevTools
             {
                 Debug.WriteLine("ERROR: " + ex);
             }
-            //StatusListBox.Items.Add("Clobbering files...");
-            //var targetRepoPath = Path.Combine(SrcDirTextBox.Text);
-            //UpdateStatus("Clobbering files...", false);
+
             //try
             //{
             //    ProcessCommands.RunCommand(targetRepoPath);
@@ -71,16 +76,16 @@ namespace DevTools
 
         private void OnBuildStartServerClick(object sender, RoutedEventArgs e)
         {
-            StatusListBox.Items.Add("Building server...");
-            StatusListBox.Items.Add("Server built.");
-            StatusListBox.Items.Add("Starting server...");
-            StatusListBox.Items.Add("Server started.");
+            UpdateStatus("Building server...", false);
+            UpdateStatus("Server built.", false);
+            UpdateStatus("Starting server...", false);
+            UpdateStatus("Server started.", false);
         }
 
         private void OnLaunchDevToolClick(object sender, RoutedEventArgs e)
         {
-            var devToolPath = Path.Combine(SrcDirTextBox.Text, "tools", "LR_Start-DevTool.ps1");
             UpdateStatus("Launching Dev Tool...", false);
+            var devToolPath = Path.Combine(SrcDirTextBox.Text, "tools", "LR_Start-DevTool.ps1");
             try
             {
                 ProcessCommands.RunCommandWindowsTerminal(WINDOWSTERMINAL_PATH, devToolPath);

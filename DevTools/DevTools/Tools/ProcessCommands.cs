@@ -33,7 +33,7 @@ namespace DevTools.Tools
 
         public static void RunCommands(string terminal, string[] commands)
         {
-            StringBuilder commandsPipe = new StringBuilder();
+            var commandsPipe = new StringBuilder();
             try
             {
                 for (int i = 0; i < commands.Length - 1; i++)

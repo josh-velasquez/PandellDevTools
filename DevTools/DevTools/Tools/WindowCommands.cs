@@ -31,9 +31,9 @@ namespace DevTools.Tools
         // task bar height = 30 pixels so 30/2 = 15 and remove 15 pixels to each height (if half)
         public static bool ResizeWindowRightHalfTopVertical(Programs targetWindow, int windowHeight, int windowWidth)
         {
-            string programName = ProgramsTool.GetDescription(targetWindow);
-            int y = -300;
-            int height = (windowHeight / 2) - 15; // Divide window size by 2 and subtract task bar height
+            var programName = ProgramsTool.GetDescription(targetWindow);
+            var y = -300;
+            var height = (windowHeight / 2) - 15; // Divide window size by 2 and subtract task bar height
             return MoveWindow(programName, windowHeight, y, windowWidth, height);
         }
 
@@ -42,30 +42,30 @@ namespace DevTools.Tools
         // task bar height = 30 pixels so 30/2 = 15 and remove 15 pixels to each height (if half)
         public static bool ResizeWindowRightHalfBottomVertical(Programs targetWindow, int windowHeight, int windowWidth)
         {
-            string programName = ProgramsTool.GetDescription(targetWindow);
-            int y = 965;
-            int height = (windowHeight / 2) - 15; // Divide window size by 2 and subtract task bar height
+            var programName = ProgramsTool.GetDescription(targetWindow);
+            var y = 965;
+            var height = (windowHeight / 2) - 15; // Divide window size by 2 and subtract task bar height
             return MoveWindow(programName, windowHeight, y, windowWidth, height);
         }
 
         public static bool ResizeWindowCenterFullHorizontal(Programs targetWindow)
         {
-            string programName = ProgramsTool.GetDescription(targetWindow);
-            int x = -1;
-            int y = 0;
-            int width = 1;
-            int height = 1;
+            var programName = ProgramsTool.GetDescription(targetWindow);
+            var x = -1;
+            var y = 0;
+            var width = 1;
+            var height = 1;
             var result = MoveWindow(programName, x, y, width, height) && MaximizeWindow(programName);
             return result;
         }
 
         public static bool ResizeWindowLeftMaximizedVertical(Programs targetWindow)
         {
-            string programName = ProgramsTool.GetDescription(targetWindow);
-            int x = -2000;
-            int y = 0;
-            int width = 1;
-            int height = 1;
+            var programName = ProgramsTool.GetDescription(targetWindow);
+            var x = -2000;
+            var y = 0;
+            var width = 1;
+            var height = 1;
             var result = MoveWindow(programName, x, y, width, height) && MaximizeWindow(programName);
             return result;
         }
@@ -77,10 +77,10 @@ namespace DevTools.Tools
                 var processes = Process.GetProcessesByName(programName);
                 foreach (var process in processes)
                 {
-                    IntPtr handle = process.MainWindowHandle;
+                    var handle = process.MainWindowHandle;
                     if (handle != IntPtr.Zero)
                     {
-                        WindowPositioning windowPositioning = new WindowPositioning();
+                        var windowPositioning = new WindowPositioning();
                         if (GetWindowRect(handle, ref windowPositioning))
                         {
                             MoveWindow(handle, x, y, width, height, repaint);
@@ -104,10 +104,10 @@ namespace DevTools.Tools
                 var processes = Process.GetProcessesByName(programName);
                 foreach (var process in processes)
                 {
-                    IntPtr handle = process.MainWindowHandle;
+                    var handle = process.MainWindowHandle;
                     if (handle != IntPtr.Zero)
                     {
-                        WindowPositioning windowPositioning = new WindowPositioning();
+                        var windowPositioning = new WindowPositioning();
                         if (GetWindowRect(handle, ref windowPositioning))
                         {
                             ShowWindow(handle, SW_SHOWMAXIMIZED);
