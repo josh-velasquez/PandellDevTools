@@ -456,6 +456,9 @@ namespace DevTools
 
         private void OnHomeTimeClick(object sender, RoutedEventArgs e)
         {
+            if (!SubmitTimeSheet())
+                return;
+
             new Thread(() =>
             {
                 UpdateStatus("Closing programs...", false);
@@ -497,6 +500,19 @@ namespace DevTools
             }).Start();
         }
 
+        private bool SubmitTimeSheet()
+        {
+            DateTime now = DateTime.Now;
+            if (now.DayOfWeek == DayOfWeek.Friday)
+            {
+                var buttons = MessageBoxButton.YesNoCancel;
+                var result = MessageBox.Show("Make sure to submit your time sheet for approval! Did you submit already?", "Time Sheet Submission Reminder", buttons);
+                if (result == MessageBoxResult.Yes)
+                    return true;
+            }
+            return false;
+        }
+
         private void OnIncognitoClick(object sender, RoutedEventArgs e)
         {
             var launchedIncognito = LaunchIncognitoBrowser();
@@ -507,3 +523,4 @@ namespace DevTools
         }
     }
 }
+ 

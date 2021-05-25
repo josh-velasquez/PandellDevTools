@@ -31,7 +31,7 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Button  HorizontalAlignment="Left" Margin="154,41,0,0" VerticalAlignment="Top" Width="148" Height="88" Background="#FFFCA311" Foreground="#FFF4F1DE" Click="OnLaunchClick" >
+        <Button  HorizontalAlignment="Left" Margin="154,41,0,0" VerticalAlignment="Top" Width="148" Height="88" Background="#FF9C92DA" Foreground="#FFF4F1DE" Click="OnLaunchClick" >
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4" />
