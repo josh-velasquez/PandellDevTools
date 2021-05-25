@@ -456,8 +456,11 @@ namespace DevTools
 
         private void OnHomeTimeClick(object sender, RoutedEventArgs e)
         {
-            if (!SubmitTimeSheet())
-                return;
+            if (DateTime.Now.DayOfWeek == DayOfWeek.Friday)
+            {
+                if (!CheckTimeSheetSubmission())
+                    return;
+            }
 
             new Thread(() =>
             {
@@ -500,16 +503,12 @@ namespace DevTools
             }).Start();
         }
 
-        private bool SubmitTimeSheet()
+        private bool CheckTimeSheetSubmission()
         {
-            DateTime now = DateTime.Now;
-            if (now.DayOfWeek == DayOfWeek.Friday)
-            {
-                var buttons = MessageBoxButton.YesNoCancel;
-                var result = MessageBox.Show("Make sure to submit your time sheet for approval! Did you submit already?", "Time Sheet Submission Reminder", buttons);
-                if (result == MessageBoxResult.Yes)
-                    return true;
-            }
+            var buttons = MessageBoxButton.YesNoCancel;
+            var result = MessageBox.Show("Make sure to submit your time sheet for approval! Did you submit already?", "Time Sheet Submission Reminder", buttons);
+            if (result == MessageBoxResult.Yes)
+                return true;
             return false;
         }
 
