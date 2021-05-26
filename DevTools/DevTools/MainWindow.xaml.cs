@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,11 +15,11 @@ namespace DevTools
     public partial class MainWindow : Window
     {
         const string SLACK_PATH = @"C:\Users\joshv\AppData\Local\slack\slack.exe";
-        const string OUTLOOK_PATH = @"C:\Program Files\Microsoft Office\root\Office16\OUTLOOK.EXE";
         const string SPOTIFY_PATH = @"C:\Users\joshv\AppData\Roaming\Spotify\Spotify.exe";
         const string WINDOWSTERMINAL_PATH = @"C:\Users\joshv\AppData\Local\Microsoft\WindowsApps\wt.exe";
-        const string CHROME_PATH = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
         const string TEMP_ASP_FILES = @"C:\Users\joshv\AppData\Local\Temp\Temporary ASP.NET Files";
+        const string OUTLOOK_PATH = @"C:\Program Files\Microsoft Office\root\Office16\OUTLOOK.EXE";
+        const string CHROME_PATH = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
         IDictionary<string, string> WEBSITES = new Dictionary<string, string>(){
             {"GitHub", "https://github.com/pandell/LandRiteWeb"},
             {"TeamCity", "https://build.pandell.com/"},
@@ -34,9 +33,6 @@ namespace DevTools
         public MainWindow()
         {
             InitializeComponent();
-            Topmost = true;
-            var repoSourceDirectory = @"D:\Repository\LandRiteWeb";
-            SrcDirTextBox.Text = repoSourceDirectory;
         }
 
         private void OnCreatePrClick(object sender, RoutedEventArgs e)
@@ -208,6 +204,7 @@ namespace DevTools
             else
                 UpdateStatus(appName + " failed to launch.", true, false);
         }
+
         private void ResizeApp(Programs program, Func<Programs, bool> ResizeFunction)
         {
             var appName = ProgramsTool.GetDescription(program);

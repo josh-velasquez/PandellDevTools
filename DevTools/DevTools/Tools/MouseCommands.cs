@@ -8,16 +8,31 @@ namespace DevTools.Tools
         private const UInt32 MOUSEEVENTF_LEFTDOWN = 0x0002;
         private const UInt32 MOUSEEVENTF_LEFTUP = 0x0004;
 
+        /// <summary>
+        /// Moves the cursor and clicks on the target location
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         public static void MoveAndClick(int x, int y)
         {
             SetCursorPosition(x, y);
-            SendClick();
+            SendLeftClick();
         }
+
+        /// <summary>
+        /// Sets the cursor position to the target position
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
         public static void SetCursorPosition(int a, int b)
         {
             SetCursorPos(a, b);
         }
-        public static void SendClick()
+
+        /// <summary>
+        /// Sends left click action to the current location of the cursor
+        /// </summary>
+        public static void SendLeftClick()
         {
             mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, new IntPtr());
             mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, new IntPtr());

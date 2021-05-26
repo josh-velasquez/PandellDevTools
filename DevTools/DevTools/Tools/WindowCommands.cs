@@ -12,9 +12,14 @@ namespace DevTools.Tools
     }
     static class WindowCommands
     {
-        const int defaultWindowHeight = 10;
-        const int defaultWindowWidth = 10;
+        const int defaultWindowHeight = 100;
+        const int defaultWindowWidth = 100;
 
+        /// <summary>
+        /// Closes target window
+        /// </summary>
+        /// <param name="targetWindow"></param>
+        /// <returns></returns>
         public static bool CloseWindow(Programs targetWindow)
         {
             try
@@ -34,6 +39,13 @@ namespace DevTools.Tools
             return false;
         }
 
+        /// <summary>
+        /// Resizes the window to the left half top vertical of the monitor
+        /// </summary>
+        /// <param name="targetWindow"></param>
+        /// <param name="windowHeight"></param>
+        /// <param name="windowWidth"></param>
+        /// <returns></returns>
         public static bool ResizeWindowLeftHalfTopVertical(Programs targetWindow, int windowHeight, int windowWidth)
         {
             var programName = ProgramsTool.GetDescription(targetWindow);
@@ -43,6 +55,13 @@ namespace DevTools.Tools
             return MoveWindow(programName, x, y, windowWidth, height);
         }
 
+        /// <summary>
+        /// Resizes the window to the left half bottom vertical of the monitor
+        /// </summary>
+        /// <param name="targetWindow"></param>
+        /// <param name="windowHeight"></param>
+        /// <param name="windowWidth"></param>
+        /// <returns></returns>
         public static bool ResizeWindowLeftHalfBottomVertical(Programs targetWindow, int windowHeight, int windowWidth)
         {
             var programName = ProgramsTool.GetDescription(targetWindow);
@@ -53,7 +72,8 @@ namespace DevTools.Tools
         }
 
         /// <summary>
-        /// Vertical oriented monitor. The total height for task bar is 30 pixels so if you have two windows on one (vertical orientation) then 30/2 = 15
+        /// Vertical oriented monitor. The total height for task bar is 30 pixels so if you have two 
+        /// windows on one (vertical orientation) then 30/2 = 15
         /// </summary>
         /// <param name="targetWindow"></param>
         /// <param name="windowHeight"></param>
@@ -68,7 +88,8 @@ namespace DevTools.Tools
         }
 
         /// <summary>
-        /// Vertical oriented monitor. The total height for task bar is 30 pixels so if you have two windows on one (vertical orientation) then 30/2 = 15
+        /// Vertical oriented monitor. The total height for task bar is 30 pixels so if you have two 
+        /// windows on one (vertical orientation) then 30/2 = 15
         /// </summary>
         /// <param name="targetWindow"></param>
         /// <param name="windowHeight"></param>

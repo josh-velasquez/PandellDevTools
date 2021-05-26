@@ -7,6 +7,10 @@ namespace DevTools.Tools
 {
     static class ProcessCommands
     {
+        /// <summary>
+        /// Runs single command
+        /// </summary>
+        /// <param name="command"></param>
         public static void RunCommand(string command)
         {
             try
@@ -19,6 +23,11 @@ namespace DevTools.Tools
             }
         }
 
+        /// <summary>
+        /// Runs command with single argument
+        /// </summary>
+        /// <param name="command"></param>
+        /// <param name="args"></param>
         public static void RunCommand(string command, string args)
         {
             try
@@ -31,6 +40,11 @@ namespace DevTools.Tools
             }
         }
 
+        /// <summary>
+        /// Runs command with multiple arguments
+        /// </summary>
+        /// <param name="terminal"></param>
+        /// <param name="commands"></param>
         public static void RunCommands(string terminal, string[] commands)
         {
             var commandsPipe = new StringBuilder();
@@ -49,6 +63,11 @@ namespace DevTools.Tools
             }
         }
 
+        /// <summary>
+        /// Executes commands on the windows terminal
+        /// </summary>
+        /// <param name="windowsTerminalPath"></param>
+        /// <param name="command"></param>
         public static void RunCommandWindowsTerminal(string windowsTerminalPath, string command)
         {
             try
@@ -61,6 +80,10 @@ namespace DevTools.Tools
             }
         }
 
+        /// <summary>
+        /// Delete target path directory
+        /// </summary>
+        /// <param name="path"></param>
         public static void DeleteDirectory(string path)
         {
             try
