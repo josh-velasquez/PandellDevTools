@@ -15,7 +15,9 @@ namespace DevTools.Tools
         [Description("spotify")]
         Spotify,
         [Description("wt")]
-        WindowsTerminal
+        WindowsTerminal,
+        [Description("vpn")]
+        VPN
     }
 
     static class ProgramsTool

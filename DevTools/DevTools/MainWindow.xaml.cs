@@ -34,6 +34,7 @@ namespace DevTools
         public MainWindow()
         {
             InitializeComponent();
+            Topmost = true;
             var repoSourceDirectory = @"D:\Repository\LandRiteWeb";
             SrcDirTextBox.Text = repoSourceDirectory;
         }
@@ -43,63 +44,6 @@ namespace DevTools
             PrGenerator prGenerator = new PrGenerator();
             prGenerator.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             prGenerator.Show();
-        }
-
-        private void OnClobberClick(object sender, RoutedEventArgs e)
-        {
-            UpdateStatus("Clobbering files...", false);
-            try
-            {
-                var targetRepoPath = SrcDirTextBox.Text;
-                Process process = new Process();
-                process.StartInfo.WorkingDirectory = targetRepoPath;
-                process.StartInfo.FileName = WINDOWSTERMINAL_PATH;
-                //process.StartInfo.RedirectStandardOutput = true;
-                process.StartInfo.Arguments = "mdkir testing";
-                process.Start();
-                //string output = process.StandardOutput.ReadToEnd();
-                //Debug.WriteLine("OUTPUT: " + output);
-                process.WaitForExit();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("ERROR: " + ex);
-            }
-
-            //try
-            //{
-            //    ProcessCommands.RunCommand(targetRepoPath);
-            //    UpdateStatus("Dev tool started.", true, true);
-            //}
-            //catch (Exception ex)
-            //{
-            //    UpdateStatus("Dev tool started.", true, true);
-            //    Debug.WriteLine("Error: " + ex);
-            //}
-        }
-
-        private void OnBuildStartServerClick(object sender, RoutedEventArgs e)
-        {
-            UpdateStatus("Building server...", false);
-            UpdateStatus("Server built.", false);
-            UpdateStatus("Starting server...", false);
-            UpdateStatus("Server started.", false);
-        }
-
-        private void OnLaunchDevToolClick(object sender, RoutedEventArgs e)
-        {
-            UpdateStatus("Launching Dev Tool...", false);
-            var devToolPath = Path.Combine(SrcDirTextBox.Text, "tools", "LR_Start-DevTool.ps1");
-            try
-            {
-                ProcessCommands.RunCommandWindowsTerminal(WINDOWSTERMINAL_PATH, devToolPath);
-                UpdateStatus("Dev tool started.", true, true);
-            }
-            catch (Exception ex)
-            {
-                UpdateStatus("Dev tool started.", true, true);
-                Debug.WriteLine("Error: " + ex);
-            }
         }
 
         private bool ConnectToVpn()
@@ -221,9 +165,9 @@ namespace DevTools
             return WindowCommands.ResizeWindowRightHalfTopVertical(targetWindow, HORIZONTAL_SCREEN_WIDTH, HORIZONTAL_SCREEN_HEIGHT);
         }
 
-        private bool ResizeWindowCenterFullHorizontal(Programs targetWindow)
+        private bool ResizeWindowCenterMaximizedHorizontal(Programs targetWindow)
         {
-            return WindowCommands.ResizeWindowCenterFullHorizontal(targetWindow);
+            return WindowCommands.ResizeWindowCenterMaximizedHorizontal(targetWindow);
         }
 
         private bool ResizeWindowRightHalfBottomVertical(Programs targetWindow)
@@ -236,7 +180,7 @@ namespace DevTools
             return WindowCommands.ResizeWindowLeftMaximizedVertical(targetWindow);
         }
 
-        private void UpdateStatus(string message, bool commandUpdate, bool success = false)
+        private void UpdateStatus(string message, bool commandUpdate = false, bool success = false)
         {
             Dispatcher.Invoke(() =>
             {
@@ -254,84 +198,78 @@ namespace DevTools
             });
         }
 
+        private void LaunchApp(Programs program, Func<bool> LaunchFunction)
+        {
+            var appName = ProgramsTool.GetDescription(program);
+            UpdateStatus("Launching " + appName + "...");
+            var launchStatus = LaunchFunction();
+            if (launchStatus)
+                UpdateStatus(appName + " launched.", true, true);
+            else
+                UpdateStatus(appName + " failed to launch.", true, false);
+        }
+        private void ResizeApp(Programs program, Func<Programs, bool> ResizeFunction)
+        {
+            var appName = ProgramsTool.GetDescription(program);
+            UpdateStatus("Resizing " + appName + "...");
+            var resizeStatus = ResizeFunction(program);
+            if (resizeStatus)
+                UpdateStatus(appName + " resized.", true, true);
+            else
+                UpdateStatus(appName + " failed to resize.", true, false);
+        }
+
         private void OnLaunchClick(object sender, RoutedEventArgs e)
         {
+            var slackCheckBox = SlackCheckBox.IsChecked.Value;
+            var outlookCheckBox = OutlookCheckBox.IsChecked.Value;
+            var chromeCheckBox = ChromeCheckBox.IsChecked.Value;
+            var spotifyCheckBox = SpotifyCheckBox.IsChecked.Value;
+            var terminalCheckBox = TerminalCheckBox.IsChecked.Value;
+            var vpnCheckBox = VpnCheckBox.IsChecked.Value;
             new Thread(() =>
             {
-                UpdateStatus("Launching programs...", false);
+                UpdateStatus("Launching programs...");
 
                 // Connect to vpn
-                UpdateStatus("Connecting to VPN...", false);
-                var vpnConnected = ConnectToVpn();
-                if (vpnConnected)
-                    UpdateStatus("Connected to VPN.", true, true);
-                else
-                    UpdateStatus("Failed to connect to VPN.", true, false);
+                if (vpnCheckBox)
+                    LaunchApp(Programs.VPN, ConnectToVpn);
 
                 // Launch slack
-                UpdateStatus("Launching Slack...", false);
-                var slackLaunched = LaunchSlack();
-                if (slackLaunched)
-                    UpdateStatus("Slack launched.", true, true);
-                else
-                    UpdateStatus("Slack failed to launch.", true, false);
+                if (slackCheckBox)
+                    LaunchApp(Programs.Slack, LaunchSlack);
 
                 // Launch outlook
-                UpdateStatus("Launching Outlook...", false);
-                var outlookLaunched = LaunchOutlook();
-                if (outlookLaunched)
-                    UpdateStatus("Outlook launched.", true, true);
-                else
-                    UpdateStatus("Outlook failed to launch.", true, false);
+                if (OutlookCheckBox.IsChecked.Value)
+                    LaunchApp(Programs.Outlook, LaunchOutlook);
 
                 // Launch chrome website(s)
-                var websitesLaunched = LaunchChromeWebsites();
-                if (websitesLaunched)
-                    UpdateStatus("All website(s) launched.", true, true);
-                else
-                    UpdateStatus("Failed to launch website(s).", true, false);
+                if (ChromeCheckBox.IsChecked.Value)
+                    LaunchApp(Programs.Chrome, LaunchChromeWebsites);
 
                 // Launch spotify
-                var spotifyLaunched = LaunchSpotify();
-                if (spotifyLaunched)
-                    UpdateStatus("Spotify launched.", true, true);
-                else
-                    UpdateStatus("Spotify failed to launch.", true, false);
+                if (SpotifyCheckBox.IsChecked.Value)
+                    LaunchApp(Programs.Spotify, LaunchSpotify);
 
                 // Launch terminal
-                var terminalLaunched = LaunchWindowsTerminal();
-                if (terminalLaunched)
-                    UpdateStatus("Windows terminal launched.", true, true);
-                else
-                    UpdateStatus("Windows terminal failed to launch.", true, false);
+                if (TerminalCheckBox.IsChecked.Value)
+                    LaunchApp(Programs.WindowsTerminal, LaunchWindowsTerminal);
 
                 // Resizing Slack window
-                var resizedSlack = ResizeWindowRightHalfTopVertical(Programs.Slack);
-                if (resizedSlack)
-                    UpdateStatus("Slack window resized.", true, true);
-                else
-                    UpdateStatus("Failed to resize Slack.", true, false);
+                if (SlackCheckBox.IsChecked.Value)
+                    ResizeApp(Programs.Slack, ResizeWindowRightHalfTopVertical);
 
                 // Resizing Outlook window
-                var resizedOutlook = ResizeWindowRightHalfBottomVertical(Programs.Outlook);
-                if (resizedOutlook)
-                    UpdateStatus("Outlook window resized.", true, true);
-                else
-                    UpdateStatus("Failed to resize Outlook.", true, false);
+                if (OutlookCheckBox.IsChecked.Value)
+                    ResizeApp(Programs.Outlook, ResizeWindowRightHalfBottomVertical);
 
                 // Resizing Chrome window
-                var resizedChrome = ResizeWindowCenterFullHorizontal(Programs.Chrome);
-                if (resizedChrome)
-                    UpdateStatus("Chrome window resized.", true, true);
-                else
-                    UpdateStatus("Failed to resize Chrome.", true, false);
+                if (ChromeCheckBox.IsChecked.Value)
+                    ResizeApp(Programs.Chrome, ResizeWindowCenterMaximizedHorizontal);
 
                 // Resizing Spotify window
-                var resizedSpotify = ResizeWindowLeftMaximizedVertical(Programs.Spotify);
-                if (resizedSpotify)
-                    UpdateStatus("Spotify window resized.", true, true);
-                else
-                    UpdateStatus("Failed to resize Spotify.", true, false);
+                if (SpotifyCheckBox.IsChecked.Value)
+                    ResizeApp(Programs.Spotify, ResizeWindowLeftMaximizedVertical);
             }).Start();
         }
 
@@ -352,35 +290,27 @@ namespace DevTools
 
         private void OnFixWindowsClick(object sender, RoutedEventArgs e)
         {
+            var slackCheckBox = SlackCheckBox.IsChecked.Value;
+            var outlookCheckBox = OutlookCheckBox.IsChecked.Value;
+            var chromeCheckBox = ChromeCheckBox.IsChecked.Value;
+            var spotifyCheckBox = SpotifyCheckBox.IsChecked.Value;
             new Thread(() =>
             {
                 // Resizing Slack window
-                var resizedSlack = ResizeWindowRightHalfTopVertical(Programs.Slack);
-                if (resizedSlack)
-                    UpdateStatus("Slack window resized.", true, true);
-                else
-                    UpdateStatus("Failed to resize Slack.", true, false);
-
+                if (slackCheckBox)
+                    ResizeApp(Programs.Slack, ResizeWindowRightHalfTopVertical);
+                
                 // Resizing Outlook window
-                var resizedOutlook = ResizeWindowRightHalfBottomVertical(Programs.Outlook);
-                if (resizedOutlook)
-                    UpdateStatus("Outlook window resized.", true, true);
-                else
-                    UpdateStatus("Failed to resize Outlook.", true, false);
+                if (outlookCheckBox)
+                    ResizeApp(Programs.Outlook, ResizeWindowRightHalfBottomVertical);
 
                 // Resizing Chrome window
-                var resizedChrome = ResizeWindowCenterFullHorizontal(Programs.Chrome);
-                if (resizedChrome)
-                    UpdateStatus("Chrome window resized.", true, true);
-                else
-                    UpdateStatus("Failed to resize Chrome.", true, false);
+                if (chromeCheckBox)
+                    ResizeApp(Programs.Chrome, ResizeWindowCenterMaximizedHorizontal);
 
                 // Resizing Spotify window
-                var resizedSpotify = ResizeWindowLeftMaximizedVertical(Programs.Spotify);
-                if (resizedSpotify)
-                    UpdateStatus("Spotify window resized.", true, true);
-                else
-                    UpdateStatus("Failed to resize Spotify.", true, false);
+                if (spotifyCheckBox)
+                    ResizeApp(Programs.Spotify, ResizeWindowLeftMaximizedVertical);
             }).Start();
         }
 
