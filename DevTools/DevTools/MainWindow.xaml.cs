@@ -20,12 +20,14 @@ namespace DevTools
         const string TEMP_ASP_FILES = @"C:\Users\joshv\AppData\Local\Temp\Temporary ASP.NET Files";
         const string OUTLOOK_PATH = @"C:\Program Files\Microsoft Office\root\Office16\OUTLOOK.EXE";
         const string CHROME_PATH = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
-        IDictionary<string, string> WEBSITES = new Dictionary<string, string>(){
+        IDictionary<string, string> WEBSITES = new Dictionary<string, string>()
+        {
             {"GitHub", "https://github.com/pandell/LandRiteWeb"},
             {"TeamCity", "https://build.pandell.com/"},
             {"LandRiteJira", "https://pandell.atlassian.net/secure/RapidBoard.jspa?rapidView=87"},
             {"Harvest", "https://pandell.harvestapp.com/welcome"},
-            { "EmployeePortal", "http://employee/"}};
+            { "EmployeePortal", "http://employee/"}
+        };
 
         int HORIZONTAL_SCREEN_WIDTH = (int)SystemParameters.PrimaryScreenWidth;
         int HORIZONTAL_SCREEN_HEIGHT = (int)SystemParameters.PrimaryScreenHeight;
@@ -33,13 +35,6 @@ namespace DevTools
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void OnCreatePrClick(object sender, RoutedEventArgs e)
-        {
-            PrGenerator prGenerator = new PrGenerator();
-            prGenerator.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            prGenerator.Show();
         }
 
         private bool ConnectToVpn()
@@ -156,6 +151,84 @@ namespace DevTools
             return true;
         }
 
+        private bool CloseSlack()
+        {
+            try
+            {
+                WindowCommands.CloseWindow(Programs.Slack);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Failed to close Slack: " + e);
+                return false;
+            }
+            return true;
+        }
+
+        private bool CloseOutlook()
+        {
+            try
+            {
+                WindowCommands.CloseWindow(Programs.Outlook);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Failed to close Outlook: " + e);
+                return false;
+            }
+            return true;
+        }
+
+        private bool CloseChrome()
+        {
+            try
+            {
+                WindowCommands.CloseWindow(Programs.Chrome);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Failed to close Chrome: " + e);
+                return false;
+            }
+            return true;
+        }
+
+        private bool CloseSpotify()
+        {
+            try
+            {
+                WindowCommands.CloseWindow(Programs.Spotify);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Failed to close Spotify: " + e);
+                return false;
+            }
+            return true;
+        }
+
+        private bool CloseWindowsTerminal()
+        {
+            try
+            {
+                WindowCommands.CloseWindow(Programs.WindowsTerminal);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Failed to close Windows Terminal: " + e);
+                return false;
+            }
+            return true;
+        }
+        private bool CheckTimeSheetSubmission()
+        {
+            var buttons = MessageBoxButton.YesNoCancel;
+            var result = MessageBox.Show("Make sure to submit your time sheet for approval! Did you submit already?", "Time Sheet Submission Reminder", buttons);
+            if (result == MessageBoxResult.Yes)
+                return true;
+            return false;
+        }
+
         private bool ResizeWindowRightHalfTopVertical(Programs targetWindow)
         {
             return WindowCommands.ResizeWindowRightHalfTopVertical(targetWindow, HORIZONTAL_SCREEN_WIDTH, HORIZONTAL_SCREEN_HEIGHT);
@@ -214,6 +287,13 @@ namespace DevTools
                 UpdateStatus(appName + " resized.", true, true);
             else
                 UpdateStatus(appName + " failed to resize.", true, false);
+        }
+
+        private void OnCreatePrClick(object sender, RoutedEventArgs e)
+        {
+            PrGenerator prGenerator = new PrGenerator();
+            prGenerator.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            prGenerator.Show();
         }
 
         private void OnLaunchClick(object sender, RoutedEventArgs e)
@@ -311,76 +391,6 @@ namespace DevTools
             }).Start();
         }
 
-        private bool CloseSlack()
-        {
-            try
-            {
-                WindowCommands.CloseWindow(Programs.Slack);
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine("Failed to close Slack: " + e);
-                return false;
-            }
-            return true;
-        }
-
-        private bool CloseOutlook()
-        {
-            try
-            {
-                WindowCommands.CloseWindow(Programs.Outlook);
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine("Failed to close Outlook: " + e);
-                return false;
-            }
-            return true;
-        }
-
-        private bool CloseChrome()
-        {
-            try
-            {
-                WindowCommands.CloseWindow(Programs.Chrome);
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine("Failed to close Chrome: " + e);
-                return false;
-            }
-            return true;
-        }
-
-        private bool CloseSpotify()
-        {
-            try
-            {
-                WindowCommands.CloseWindow(Programs.Spotify);
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine("Failed to close Spotify: " + e);
-                return false;
-            }
-            return true;
-        }
-
-        private bool CloseWindowsTerminal()
-        {
-            try
-            {
-                WindowCommands.CloseWindow(Programs.WindowsTerminal);
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine("Failed to close Windows Terminal: " + e);
-                return false;
-            }
-            return true;
-        }
-
         private void OnHomeTimeClick(object sender, RoutedEventArgs e)
         {
             if (DateTime.Now.DayOfWeek == DayOfWeek.Friday)
@@ -428,15 +438,6 @@ namespace DevTools
                 else
                     UpdateStatus("Failed to close Windows Terminal.", true, false);
             }).Start();
-        }
-
-        private bool CheckTimeSheetSubmission()
-        {
-            var buttons = MessageBoxButton.YesNoCancel;
-            var result = MessageBox.Show("Make sure to submit your time sheet for approval! Did you submit already?", "Time Sheet Submission Reminder", buttons);
-            if (result == MessageBoxResult.Yes)
-                return true;
-            return false;
         }
 
         private void OnIncognitoClick(object sender, RoutedEventArgs e)
