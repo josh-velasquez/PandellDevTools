@@ -391,6 +391,36 @@ namespace DevTools
             }).Start();
         }
 
+        private DayOfWeek GetDayOfWeekFromDate(DateTime currentDate, int targetDate) {
+            return new DateTime(currentDate.Year, currentDate.Month, targetDate).DayOfWeek;
+        }
+        private void CheckPayDay() {
+            var currentDate = DateTime.Now;
+            var numDays = DateTime.DaysInMonth(currentDate.Year, currentDate.Month);
+            
+            var biWeeklySundayPayDay = GetDayOfWeekFromDate(currentDate, (numDays / 2) - 2);
+            var biWeeklySaturdayPayDay = GetDayOfWeekFromDate(currentDate, (numDays / 2) - 1);
+            var biWeeklyWeekDayPayDay = GetDayOfWeekFromDate(currentDate, numDays / 2);
+            
+            if ((biWeeklySundayPayDay == DayOfWeek.Friday) || 
+                (biWeeklySaturdayPayDay == DayOfWeek.Friday) || 
+                (biWeeklyWeekDayPayDay != DayOfWeek.Saturday || biWeeklyWeekDayPayDay != DayOfWeek.Sunday)) {
+                MessageBox.Show("It's halfway through the month today so it's pay day today!");
+                return;
+            }
+            
+            var endOfMonthSundayPayDay = GetDayOfWeekFromDate(currentDate, (numDays / 2) - 2);
+            var endOfMonthSaturdayPayDay = GetDayOfWeekFromDate(currentDate, (numDays / 2) - 1);
+            var endOfMonthWeekDayPayDay = GetDayOfWeekFromDate(currentDate, numDays / 2);
+
+            if ((endOfMonthSundayPayDay == DayOfWeek.Friday) || 
+                (endOfMonthSaturdayPayDay == DayOfWeek.Friday) || 
+                (endOfMonthWeekDayPayDay != DayOfWeek.Saturday || endOfMonthWeekDayPayDay != DayOfWeek.Sunday)) {
+                MessageBox.Show("It's end of the month today so it's pay day today!");
+                return;
+            }
+        }
+
         private void OnHomeTimeClick(object sender, RoutedEventArgs e)
         {
             if (DateTime.Now.DayOfWeek == DayOfWeek.Friday)
@@ -398,6 +428,8 @@ namespace DevTools
                 if (!CheckTimeSheetSubmission())
                     return;
             }
+
+            CheckPayDay();
 
             new Thread(() =>
             {
