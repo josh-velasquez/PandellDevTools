@@ -7,8 +7,8 @@
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         Topmost="True"
-        ResizeMode="NoResize"
-        Title="Dev Tools" Height="362.126" Width="396.808" Background="#FF293241">
+        ResizeMode="CanMinimize"
+        Title="Dev Tools" Height="362.126" Width="487.475" Background="#FF293241">
     <Grid>
         <Grid.ColumnDefinitions>
         </Grid.ColumnDefinitions>
@@ -64,5 +64,6 @@
         <CheckBox x:Name="SpotifyCheckBox" Content="Spotify" HorizontalAlignment="Left" Margin="307,74,0,0" VerticalAlignment="Top" Foreground="#FFF1FAEE" IsChecked="True"/>
         <CheckBox x:Name="TerminalCheckBox" Content="Terminal" HorizontalAlignment="Left" Margin="307,94,0,0" VerticalAlignment="Top" Foreground="#FFF1FAEE" IsChecked="True"/>
         <CheckBox x:Name="VpnCheckBox" Content="VPN" HorizontalAlignment="Left" Margin="307,114,0,0" VerticalAlignment="Top" Foreground="#FFF1FAEE" IsChecked="True"/>
+        <CheckBox x:Name="VSCodeCheckBox" Content="VS Code" HorizontalAlignment="Left" Margin="395,12,0,0" VerticalAlignment="Top" Foreground="#FFF1FAEE" IsChecked="True" />
     </Grid>
 </Window>

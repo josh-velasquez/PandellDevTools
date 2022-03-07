@@ -1,0 +1,15 @@
+D:\Repository\PandellDevTools\PrGenerator\PrGenerator\bin\Release\PrGenerator.exe.config
+D:\Repository\PandellDevTools\PrGenerator\PrGenerator\bin\Release\PrGenerator.exe
+D:\Repository\PandellDevTools\PrGenerator\PrGenerator\bin\Release\PrGenerator.pdb
+D:\Repository\PandellDevTools\PrGenerator\PrGenerator\obj\Release\PrGenerator.csproj.AssemblyReference.cache
+D:\Repository\PandellDevTools\PrGenerator\PrGenerator\obj\Release\MainWindow.g.cs
+D:\Repository\PandellDevTools\PrGenerator\PrGenerator\obj\Release\App.g.cs
+D:\Repository\PandellDevTools\PrGenerator\PrGenerator\obj\Release\PrGenerator_MarkupCompile.cache
+D:\Repository\PandellDevTools\PrGenerator\PrGenerator\obj\Release\PrGenerator_MarkupCompile.lref
+D:\Repository\PandellDevTools\PrGenerator\PrGenerator\obj\Release\MainWindow.baml
+D:\Repository\PandellDevTools\PrGenerator\PrGenerator\obj\Release\PrGenerator.g.resources
+D:\Repository\PandellDevTools\PrGenerator\PrGenerator\obj\Release\PrGenerator.Properties.Resources.resources
+D:\Repository\PandellDevTools\PrGenerator\PrGenerator\obj\Release\PrGenerator.csproj.GenerateResource.cache
+D:\Repository\PandellDevTools\PrGenerator\PrGenerator\obj\Release\PrGenerator.csproj.CoreCompileInputs.cache
+D:\Repository\PandellDevTools\PrGenerator\PrGenerator\obj\Release\PrGenerator.exe
+D:\Repository\PandellDevTools\PrGenerator\PrGenerator\obj\Release\PrGenerator.pdb

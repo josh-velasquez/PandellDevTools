@@ -37,6 +37,17 @@ namespace DevTools
             InitializeComponent();
         }
 
+        private void CheckPayDay()
+        {
+            //var dateTime = DateTime.Now;
+            var dateTime = new DateTime(2021, 6, 14);
+            if ((dateTime.Day == 15 && (dateTime.DayOfWeek != DayOfWeek.Saturday || dateTime.DayOfWeek != DayOfWeek.Sunday)))
+                MessageBox.Show("It's pay day today! Nice!");
+            else if ((dateTime.Day - 1 == 15 || dateTime.Day + 1 == 15) && (dateTime.DayOfWeek != DayOfWeek.Saturday || dateTime.DayOfWeek != DayOfWeek.Sunday))
+                MessageBox.Show("It's pay day today! Nice!");
+
+        }
+
         private bool ConnectToVpn()
         {
             try
@@ -149,6 +160,11 @@ namespace DevTools
                 return false;
             }
             return true;
+        }
+
+        private bool LaunchVsCode()
+        {
+            return false;
         }
 
         private bool CloseSlack()
@@ -317,35 +333,40 @@ namespace DevTools
                     LaunchApp(Programs.Slack, LaunchSlack);
 
                 // Launch outlook
-                if (OutlookCheckBox.IsChecked.Value)
+                if (outlookCheckBox)
                     LaunchApp(Programs.Outlook, LaunchOutlook);
 
                 // Launch chrome website(s)
-                if (ChromeCheckBox.IsChecked.Value)
+                if (chromeCheckBox)
                     LaunchApp(Programs.Chrome, LaunchChromeWebsites);
 
                 // Launch spotify
-                if (SpotifyCheckBox.IsChecked.Value)
+                if (spotifyCheckBox)
                     LaunchApp(Programs.Spotify, LaunchSpotify);
 
                 // Launch terminal
-                if (TerminalCheckBox.IsChecked.Value)
+                if (terminalCheckBox)
                     LaunchApp(Programs.WindowsTerminal, LaunchWindowsTerminal);
 
+                // Launch VS Code
+
+                // Delay and wait for programs to launch then resize
+                Thread.Sleep(1000);
+
                 // Resizing Slack window
-                if (SlackCheckBox.IsChecked.Value)
+                if (slackCheckBox)
                     ResizeApp(Programs.Slack, ResizeWindowRightHalfTopVertical);
 
                 // Resizing Outlook window
-                if (OutlookCheckBox.IsChecked.Value)
+                if (outlookCheckBox)
                     ResizeApp(Programs.Outlook, ResizeWindowRightHalfBottomVertical);
 
                 // Resizing Chrome window
-                if (ChromeCheckBox.IsChecked.Value)
+                if (chromeCheckBox)
                     ResizeApp(Programs.Chrome, ResizeWindowCenterMaximizedHorizontal);
 
                 // Resizing Spotify window
-                if (SpotifyCheckBox.IsChecked.Value)
+                if (spotifyCheckBox)
                     ResizeApp(Programs.Spotify, ResizeWindowLeftMaximizedVertical);
             }).Start();
         }
@@ -393,51 +414,52 @@ namespace DevTools
 
         private void OnHomeTimeClick(object sender, RoutedEventArgs e)
         {
-            if (DateTime.Now.DayOfWeek == DayOfWeek.Friday)
-            {
-                if (!CheckTimeSheetSubmission())
-                    return;
-            }
+            //if (DateTime.Now.DayOfWeek == DayOfWeek.Friday)
+            //{
+            //    if (!CheckTimeSheetSubmission())
+            //        return;
+            //}
+            CheckPayDay();
 
-            new Thread(() =>
-            {
-                UpdateStatus("Closing programs...", false);
+            //new Thread(() =>
+            //{
+            //    UpdateStatus("Closing programs...", false);
 
-                // Closing Slack
-                var slackClosed = CloseSlack();
-                if (slackClosed)
-                    UpdateStatus("Slack closed.", true, true);
-                else
-                    UpdateStatus("Failed to close Slack.", true, false);
+            //    // Closing Slack
+            //    var slackClosed = CloseSlack();
+            //    if (slackClosed)
+            //        UpdateStatus("Slack closed.", true, true);
+            //    else
+            //        UpdateStatus("Failed to close Slack.", true, false);
 
-                // Closing Outlook
-                var outlookClosed = CloseOutlook();
-                if (outlookClosed)
-                    UpdateStatus("Outlook closed.", true, true);
-                else
-                    UpdateStatus("Failed to close Outlook.", true, false);
+            //    // Closing Outlook
+            //    var outlookClosed = CloseOutlook();
+            //    if (outlookClosed)
+            //        UpdateStatus("Outlook closed.", true, true);
+            //    else
+            //        UpdateStatus("Failed to close Outlook.", true, false);
 
-                // Closing Chrome
-                var chromeClosed = CloseChrome();
-                if (chromeClosed)
-                    UpdateStatus("Chrome closed.", true, true);
-                else
-                    UpdateStatus("Failed to close Chrome.", true, false);
+            //    // Closing Chrome
+            //    var chromeClosed = CloseChrome();
+            //    if (chromeClosed)
+            //        UpdateStatus("Chrome closed.", true, true);
+            //    else
+            //        UpdateStatus("Failed to close Chrome.", true, false);
 
-                // Closing Spotify
-                var spotifyClosed = CloseSpotify();
-                if (spotifyClosed)
-                    UpdateStatus("Spotify closed.", true, true);
-                else
-                    UpdateStatus("Failed to close Spotify.", true, false);
+            //    // Closing Spotify
+            //    var spotifyClosed = CloseSpotify();
+            //    if (spotifyClosed)
+            //        UpdateStatus("Spotify closed.", true, true);
+            //    else
+            //        UpdateStatus("Failed to close Spotify.", true, false);
 
-                // Closing Windows Terminal
-                var wtClosed = CloseWindowsTerminal();
-                if (wtClosed)
-                    UpdateStatus("Windows Terminal closed.", true, true);
-                else
-                    UpdateStatus("Failed to close Windows Terminal.", true, false);
-            }).Start();
+            //    // Closing Windows Terminal
+            //    var wtClosed = CloseWindowsTerminal();
+            //    if (wtClosed)
+            //        UpdateStatus("Windows Terminal closed.", true, true);
+            //    else
+            //        UpdateStatus("Failed to close Windows Terminal.", true, false);
+            //}).Start();
         }
 
         private void OnIncognitoClick(object sender, RoutedEventArgs e)
