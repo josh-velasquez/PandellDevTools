@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\Repository\PandellDevTools\DevTools\DevTools\obj\Release\
+F:\Repositories\PandellDevTools\DevTools\DevTools\obj\Release\
 DevTools
 none
 false
 TRACE
-D:\Repository\PandellDevTools\DevTools\DevTools\App.xaml
+F:\Repositories\PandellDevTools\DevTools\DevTools\App.xaml
 2-2062863890
 
 10-1423422864
 13-1505183044
 MainWindow.xaml;PrGenerator.xaml;
 
-False
+True
 

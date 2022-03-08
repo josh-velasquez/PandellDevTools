@@ -7,13 +7,13 @@
         mc:Ignorable="d"
         Title="Pull Request Generator" Height="458" Width="782" Background="#FF293241">
     <Grid>
-        <TextBox x:Name="JiraNumberTextBox" HorizontalAlignment="Left" Height="26" Margin="94,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="113" VerticalContentAlignment="Center" Background="#FF98C1D9"/>
+        <TextBox x:Name="JiraNumberTextBox" HorizontalAlignment="Left" Height="26" Margin="204,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="201" VerticalContentAlignment="Center" Background="#FF98C1D9"/>
         <TextBox x:Name="JiraDescriptionTextBox" HorizontalAlignment="Left" Height="267" Margin="10,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="370" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Background="#FF98C1D9"/>
         <TextBox x:Name="BodyTextBox" HorizontalAlignment="Left" Height="267" Margin="385,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="370" VerticalScrollBarVisibility="Auto" AcceptsReturn="True" Background="#FF98C1D9"/>
-        <Label Content="JIRA Number" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.026,-0.577" Foreground="White"/>
+        <Label Content="JIRA Ticket" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.026,-0.577" Foreground="White"/>
         <Label Content="JIRA Description" HorizontalAlignment="Left" Margin="10,111,0,0" VerticalAlignment="Top" Width="101" Foreground="White"/>
         <Label Content="Body" HorizontalAlignment="Left" Margin="385,111,0,0" VerticalAlignment="Top" Width="48" Foreground="White"/>
-        <Button Content="Generate" HorizontalAlignment="Left" Margin="212,10,0,0" VerticalAlignment="Top" Width="137" Height="26" Click="OnGenerateClick" Background="#FFEE6C4D" Foreground="Black" >
+        <Button Content="Generate" HorizontalAlignment="Left" Margin="410,10,0,0" VerticalAlignment="Top" Width="170" Height="26" Click="OnGenerateClick" Background="#FFEE6C4D" Foreground="Black" >
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="4" />
@@ -27,7 +27,7 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Content="Clear" HorizontalAlignment="Left" Margin="354,10,0,0" VerticalAlignment="Top" Width="137" Height="26" Click="OnClearClick" Background="#FFCB2828" Foreground="Black" >
+        <Button Content="Clear" HorizontalAlignment="Left" Margin="585,10,0,0" VerticalAlignment="Top" Width="170" Height="26" Click="OnClearClick" Background="#FFCB2828" Foreground="Black" >
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4" />
@@ -45,5 +45,6 @@
                 </Style>
             </Button.Resources>
         </Button>
+        <ComboBox x:Name="JiraTicketType" HorizontalAlignment="Left" Margin="82,10,0,0" VerticalAlignment="Top" Width="117" Height="26" Background="#FF98C1D9" BorderBrush="#FF98C1D9"/>
     </Grid>
 </Window>

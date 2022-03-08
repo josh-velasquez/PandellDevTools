@@ -8,11 +8,11 @@
         mc:Ignorable="d"
         Topmost="True"
         ResizeMode="CanMinimize"
-        Title="Dev Tools" Height="362.126" Width="487.475" Background="#FF293241">
+        Title="Dev Tools" Height="381.028" Width="589.956" Background="#FF293241">
     <Grid>
         <Grid.ColumnDefinitions>
         </Grid.ColumnDefinitions>
-        <Button  HorizontalAlignment="Left" Margin="155,10,0,0" VerticalAlignment="Top" Width="147" Height="58" Background="#FF9C92DA" Foreground="#FFF4F1DE" Click="OnLaunchClick" >
+        <Button  HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="100" Height="87" Background="#FF9C92DA" Foreground="#FFF4F1DE" Click="OnLaunchClick" >
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4" />
@@ -20,50 +20,49 @@
             </Button.Resources>
             <Image Height="49" Width="80" Source="launch.png"/>
         </Button>
-        <Button Content="Pull Request Generator" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Width="140" Height="26" Background="#FFEE6C4D" Foreground="#FFF1FAEE" Click="OnCreatePrClick" >
+        <Button Content="Pull Request Generator" HorizontalAlignment="Left" Margin="286,42,0,0" VerticalAlignment="Top" Width="140" Height="26" Background="#FFEE6C4D" Foreground="#FFF1FAEE" Click="OnCreatePrClick" >
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4" />
                 </Style>
             </Button.Resources>
         </Button>
-        <Label Content="Status:" HorizontalAlignment="Left" Margin="10,134,0,0" VerticalAlignment="Top" Foreground="#FFF1FAEE" Width="60"/>
-        <ListBox x:Name="StatusListBox" Margin="10,165,10,10" Background="#FF98C1D9" Foreground="White"/>
-        <Button Content="Delete Temp ASP Files" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="140" Height="26" Background="#FFEE6C4D" Foreground="#FFF1FAEE" Click="OnDelTempAspFilesClick" >
+        <Label Content="Status:" HorizontalAlignment="Left" Margin="10,113,0,0" VerticalAlignment="Top" Foreground="#FFF1FAEE" Width="60"/>
+        <ListBox x:Name="StatusListBox" Margin="10,144,10,10" Background="#FF98C1D9" Foreground="White"/>
+        <Button Content="Delete Temp ASP Files" HorizontalAlignment="Left" Margin="286,11,0,0" VerticalAlignment="Top" Width="140" Height="26" Background="#FFEE6C4D" Foreground="#FFF1FAEE" Click="OnDelTempAspFilesClick" >
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4" />
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Content="Fix Windows" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top" Width="140" Height="26" Background="#FFEE6C4D" Foreground="#FFF1FAEE" Click="OnFixWindowsClick" >
+        <Button Content="Touch config file" HorizontalAlignment="Left" Margin="437,11,0,0" VerticalAlignment="Top" Width="140" Height="26" Background="#FFEE6C4D" Foreground="#FFF1FAEE" Click="OnTouchConfigFile" >
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4" />
                 </Style>
             </Button.Resources>
         </Button>
-        <Button  HorizontalAlignment="Left" Margin="155,73,0,0" VerticalAlignment="Top" Width="147" Height="57" Background="#FF9DDC8A" Foreground="#FFF4F1DE" Click="OnHomeTimeClick" >
-            <Button.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="4" />
-                </Style>
-            </Button.Resources>
-            <Image Height="49" Width="80" Source="home.png"/>
-        </Button>
-        <Button Content="Incognito Browser" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top" Width="140" Height="26" Background="#FFEE6C4D" Foreground="#FFF1FAEE" Click="OnIncognitoClick" >
+        <Button Content="Incognito Browser" HorizontalAlignment="Left" Margin="286,71,0,0" VerticalAlignment="Top" Width="140" Height="26" Background="#FFEE6C4D" Foreground="#FFF1FAEE" Click="OnIncognitoClick" >
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4" />
                 </Style>
             </Button.Resources>
         </Button>
-        <CheckBox x:Name="OutlookCheckBox" Content="Outlook" HorizontalAlignment="Left" Margin="307,12,0,0" VerticalAlignment="Top" Foreground="#FFF1FAEE" IsChecked="True"/>
-        <CheckBox x:Name="SlackCheckBox" Content="Slack" HorizontalAlignment="Left" Margin="307,32,0,0" VerticalAlignment="Top" Foreground="#FFF1FAEE" IsChecked="True"/>
-        <CheckBox x:Name="ChromeCheckBox" Content="Chrome" HorizontalAlignment="Left" Margin="307,52,0,0" VerticalAlignment="Top" Foreground="#FFF1FAEE" IsChecked="True"/>
-        <CheckBox x:Name="SpotifyCheckBox" Content="Spotify" HorizontalAlignment="Left" Margin="307,74,0,0" VerticalAlignment="Top" Foreground="#FFF1FAEE" IsChecked="True"/>
-        <CheckBox x:Name="TerminalCheckBox" Content="Terminal" HorizontalAlignment="Left" Margin="307,94,0,0" VerticalAlignment="Top" Foreground="#FFF1FAEE" IsChecked="True"/>
-        <CheckBox x:Name="VpnCheckBox" Content="VPN" HorizontalAlignment="Left" Margin="307,114,0,0" VerticalAlignment="Top" Foreground="#FFF1FAEE" IsChecked="True"/>
-        <CheckBox x:Name="VSCodeCheckBox" Content="VS Code" HorizontalAlignment="Left" Margin="395,12,0,0" VerticalAlignment="Top" Foreground="#FFF1FAEE" IsChecked="True" />
+        <CheckBox x:Name="OutlookCheckBox" Content="Outlook" HorizontalAlignment="Left" Margin="123,12,0,0" VerticalAlignment="Top" Foreground="#FFF1FAEE" IsChecked="True"/>
+        <CheckBox x:Name="SlackCheckBox" Content="Slack" HorizontalAlignment="Left" Margin="123,32,0,0" VerticalAlignment="Top" Foreground="#FFF1FAEE" IsChecked="True"/>
+        <CheckBox x:Name="ChromeCheckBox" Content="Chrome" HorizontalAlignment="Left" Margin="123,52,0,0" VerticalAlignment="Top" Foreground="#FFF1FAEE" IsChecked="True"/>
+        <CheckBox x:Name="SpotifyCheckBox" Content="Spotify" HorizontalAlignment="Left" Margin="123,74,0,0" VerticalAlignment="Top" Foreground="#FFF1FAEE" IsChecked="True"/>
+        <CheckBox x:Name="TerminalCheckBox" Content="Terminal" HorizontalAlignment="Left" Margin="208,32,0,0" VerticalAlignment="Top" Foreground="#FFF1FAEE" IsChecked="True"/>
+        <CheckBox x:Name="VpnCheckBox" Content="VPN" HorizontalAlignment="Left" Margin="208,52,0,0" VerticalAlignment="Top" Foreground="#FFF1FAEE"/>
+        <CheckBox x:Name="VSCodeCheckBox" Content="VS Code" HorizontalAlignment="Left" Margin="208,12,0,0" VerticalAlignment="Top" Foreground="#FFF1FAEE" IsChecked="True" />
+        <Button Content="Fix Windows" HorizontalAlignment="Left" Margin="437,42,0,0" VerticalAlignment="Top" Width="140" Height="26" Background="#FFEE6C4D" Foreground="#FFF1FAEE" Click="OnFixWindowsClick" >
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="4" />
+                </Style>
+            </Button.Resources>
+        </Button>
     </Grid>
 </Window>

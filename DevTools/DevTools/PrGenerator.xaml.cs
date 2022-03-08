@@ -9,12 +9,19 @@ namespace DevTools
     /// </summary>
     public partial class PrGenerator : Window
     {
+        string[] JiraTicketTypes = { "LRW", "GIS", "PRJ" };
         public PrGenerator()
         {
             InitializeComponent();
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            foreach (var val in JiraTicketTypes)
+            {
+                JiraTicketType.Items.Add(val);
+            }
+            JiraTicketType.SelectedIndex = 0;
         }
 
-        const string ROOT_URL = "https://pandell.atlassian.net/browse/LRW-";
+        const string ROOT_URL = "https://pandell.atlassian.net/browse/";
 
         private void OnGenerateClick(object sender, RoutedEventArgs e)
         {
@@ -43,7 +50,7 @@ namespace DevTools
             MessageBox.Show("Don't forget to assign the Pull Request to yourself!");
         }
 
-        private static string buildPullRequestBody(string jiraNumber, string jiraDescription)
+        private string buildPullRequestBody(string jiraNumber, string jiraDescription)
         {
             var pullRequest = new StringBuilder();
             var header = generateHeader(jiraNumber);
@@ -56,15 +63,15 @@ namespace DevTools
             return pullRequest.ToString();
         }
 
-        private static string generateTitle(string jiraNumber, string jiraHeader)
+        private string generateTitle(string jiraNumber, string jiraHeader)
         {
-            var title = "LRW-" + jiraNumber + " " + jiraHeader;
+            var title = JiraTicketType.SelectedItem + "-" + jiraNumber + " " + jiraHeader;
             return title;
         }
 
-        private static string generateHeader(string jiraNumber)
+        private string generateHeader(string jiraNumber)
         {
-            var header = "[JIRA LRW-" + jiraNumber + "](" + ROOT_URL + jiraNumber + ")";
+            var header = "[JIRA " + JiraTicketType.SelectedItem + "-" + jiraNumber + "](" + ROOT_URL + JiraTicketType.SelectedItem + "-" + jiraNumber + ")";
             return header;
         }
 

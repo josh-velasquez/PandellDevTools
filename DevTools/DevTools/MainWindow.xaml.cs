@@ -20,6 +20,7 @@ namespace DevTools
         const string TEMP_ASP_FILES = @"C:\Users\joshv\AppData\Local\Temp\Temporary ASP.NET Files";
         const string OUTLOOK_PATH = @"C:\Program Files\Microsoft Office\root\Office16\OUTLOOK.EXE";
         const string CHROME_PATH = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
+        const string CONFIG_PATH = @"\src\";
         IDictionary<string, string> WEBSITES = new Dictionary<string, string>()
         {
             {"GitHub", "https://github.com/pandell/LandRiteWeb"},
@@ -377,6 +378,7 @@ namespace DevTools
 
         private void OnFixWindowsClick(object sender, RoutedEventArgs e)
         {
+            return;
             var slackCheckBox = SlackCheckBox.IsChecked.Value;
             var outlookCheckBox = OutlookCheckBox.IsChecked.Value;
             var chromeCheckBox = ChromeCheckBox.IsChecked.Value;
@@ -450,6 +452,11 @@ namespace DevTools
                 UpdateStatus("Incognito browser launched.", true, true);
             else
                 UpdateStatus("Incognito browser failed to launch.", true, false);
+        }
+
+        private void OnTouchConfigFile(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
