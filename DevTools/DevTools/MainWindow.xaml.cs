@@ -151,6 +151,11 @@ namespace DevTools
             return true;
         }
 
+        private bool LaunchVsCode()
+        {
+            return false;
+        }
+
         private bool CloseSlack()
         {
             try
@@ -317,35 +322,40 @@ namespace DevTools
                     LaunchApp(Programs.Slack, LaunchSlack);
 
                 // Launch outlook
-                if (OutlookCheckBox.IsChecked.Value)
+                if (outlookCheckBox)
                     LaunchApp(Programs.Outlook, LaunchOutlook);
 
                 // Launch chrome website(s)
-                if (ChromeCheckBox.IsChecked.Value)
+                if (chromeCheckBox)
                     LaunchApp(Programs.Chrome, LaunchChromeWebsites);
 
                 // Launch spotify
-                if (SpotifyCheckBox.IsChecked.Value)
+                if (spotifyCheckBox)
                     LaunchApp(Programs.Spotify, LaunchSpotify);
 
                 // Launch terminal
-                if (TerminalCheckBox.IsChecked.Value)
+                if (terminalCheckBox)
                     LaunchApp(Programs.WindowsTerminal, LaunchWindowsTerminal);
 
+                // Launch VS Code
+
+                // Delay and wait for programs to launch then resize
+                Thread.Sleep(1000);
+
                 // Resizing Slack window
-                if (SlackCheckBox.IsChecked.Value)
+                if (slackCheckBox)
                     ResizeApp(Programs.Slack, ResizeWindowRightHalfTopVertical);
 
                 // Resizing Outlook window
-                if (OutlookCheckBox.IsChecked.Value)
+                if (outlookCheckBox)
                     ResizeApp(Programs.Outlook, ResizeWindowRightHalfBottomVertical);
 
                 // Resizing Chrome window
-                if (ChromeCheckBox.IsChecked.Value)
+                if (chromeCheckBox)
                     ResizeApp(Programs.Chrome, ResizeWindowCenterMaximizedHorizontal);
 
                 // Resizing Spotify window
-                if (SpotifyCheckBox.IsChecked.Value)
+                if (spotifyCheckBox)
                     ResizeApp(Programs.Spotify, ResizeWindowLeftMaximizedVertical);
             }).Start();
         }
@@ -394,6 +404,7 @@ namespace DevTools
         private DayOfWeek GetDayOfWeekFromDate(DateTime currentDate, int targetDate) {
             return new DateTime(currentDate.Year, currentDate.Month, targetDate).DayOfWeek;
         }
+
         private void CheckPayDay() {
             var currentDate = DateTime.Now;
             var numDays = DateTime.DaysInMonth(currentDate.Year, currentDate.Month);
@@ -430,46 +441,6 @@ namespace DevTools
             }
 
             CheckPayDay();
-
-            new Thread(() =>
-            {
-                UpdateStatus("Closing programs...", false);
-
-                // Closing Slack
-                var slackClosed = CloseSlack();
-                if (slackClosed)
-                    UpdateStatus("Slack closed.", true, true);
-                else
-                    UpdateStatus("Failed to close Slack.", true, false);
-
-                // Closing Outlook
-                var outlookClosed = CloseOutlook();
-                if (outlookClosed)
-                    UpdateStatus("Outlook closed.", true, true);
-                else
-                    UpdateStatus("Failed to close Outlook.", true, false);
-
-                // Closing Chrome
-                var chromeClosed = CloseChrome();
-                if (chromeClosed)
-                    UpdateStatus("Chrome closed.", true, true);
-                else
-                    UpdateStatus("Failed to close Chrome.", true, false);
-
-                // Closing Spotify
-                var spotifyClosed = CloseSpotify();
-                if (spotifyClosed)
-                    UpdateStatus("Spotify closed.", true, true);
-                else
-                    UpdateStatus("Failed to close Spotify.", true, false);
-
-                // Closing Windows Terminal
-                var wtClosed = CloseWindowsTerminal();
-                if (wtClosed)
-                    UpdateStatus("Windows Terminal closed.", true, true);
-                else
-                    UpdateStatus("Failed to close Windows Terminal.", true, false);
-            }).Start();
         }
 
         private void OnIncognitoClick(object sender, RoutedEventArgs e)

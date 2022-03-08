@@ -1,0 +1,15 @@
+D:\Repository\PandellDevTools\PrGenerator\PrGenerator\bin\Debug\PrGenerator.exe.config
+D:\Repository\PandellDevTools\PrGenerator\PrGenerator\bin\Debug\PrGenerator.exe
+D:\Repository\PandellDevTools\PrGenerator\PrGenerator\bin\Debug\PrGenerator.pdb
+D:\Repository\PandellDevTools\PrGenerator\PrGenerator\obj\Debug\PrGenerator.csproj.AssemblyReference.cache
+D:\Repository\PandellDevTools\PrGenerator\PrGenerator\obj\Debug\MainWindow.g.cs
+D:\Repository\PandellDevTools\PrGenerator\PrGenerator\obj\Debug\App.g.cs
+D:\Repository\PandellDevTools\PrGenerator\PrGenerator\obj\Debug\PrGenerator_MarkupCompile.cache
+D:\Repository\PandellDevTools\PrGenerator\PrGenerator\obj\Debug\PrGenerator_MarkupCompile.lref
+D:\Repository\PandellDevTools\PrGenerator\PrGenerator\obj\Debug\MainWindow.baml
+D:\Repository\PandellDevTools\PrGenerator\PrGenerator\obj\Debug\PrGenerator.g.resources
+D:\Repository\PandellDevTools\PrGenerator\PrGenerator\obj\Debug\PrGenerator.Properties.Resources.resources
+D:\Repository\PandellDevTools\PrGenerator\PrGenerator\obj\Debug\PrGenerator.csproj.GenerateResource.cache
+D:\Repository\PandellDevTools\PrGenerator\PrGenerator\obj\Debug\PrGenerator.csproj.CoreCompileInputs.cache
+D:\Repository\PandellDevTools\PrGenerator\PrGenerator\obj\Debug\PrGenerator.exe
+D:\Repository\PandellDevTools\PrGenerator\PrGenerator\obj\Debug\PrGenerator.pdb

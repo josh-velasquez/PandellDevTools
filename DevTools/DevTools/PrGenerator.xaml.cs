@@ -40,6 +40,7 @@ namespace DevTools
             var pullRequest = buildPullRequestBody(jiraNumber, jiraDescription);
             TitleTextBox.Text = title;
             BodyTextBox.Text = pullRequest;
+            MessageBox.Show("Don't forget to assign the Pull Request to yourself!");
         }
 
         private static string buildPullRequestBody(string jiraNumber, string jiraDescription)
