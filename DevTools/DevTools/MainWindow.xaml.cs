@@ -14,13 +14,13 @@ namespace DevTools
     /// </summary>
     public partial class MainWindow : Window
     {
-        string SLACK_PATH = @"\Local\slack\slack.exe";
-        string SPOTIFY_PATH = @"\Roaming\Spotify\Spotify.exe";
-        string WINDOWSTERMINAL_PATH = @"\Local\Microsoft\WindowsApps\wt.exe";
-        string TEMP_ASP_FILES = @"\Local\Temp\Temporary ASP.NET Files";
+        string SLACK_PATH = @"C:\Users\joshv\AppData\Local\slack\slack.exe";
+        string SPOTIFY_PATH = @"C:\Users\joshv\AppData\Roaming\Spotify\Spotify.exe";
+        string WINDOWSTERMINAL_PATH = @"C:\Users\joshv\AppData\Local\Microsoft\WindowsApps\wt.exe";
+        string TEMP_ASP_FILES = @"C:\Users\joshv\AppData\Local\Temp\Temporary ASP.NET Files";
         string OUTLOOK_PATH = @"C:\Program Files\Microsoft Office\root\Office16\OUTLOOK.EXE";
         string CHROME_PATH = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
-        string CONFIG_PATH = @"\src\Pandell.LandRite.Web\Pli.config.devel.jsonc";
+        string CONFIG_PATH = @"D:\Repository\LandRiteWeb\src\Pandell.LandRite.Web\Pli.config.devel.jsonc";
         IDictionary<string, string> WEBSITES = new Dictionary<string, string>()
         {
             {"GitHub", "https://github.com/pandell/LandRiteWeb"},
@@ -33,21 +33,6 @@ namespace DevTools
         public MainWindow()
         {
             InitializeComponent();
-            UpdateUserPath();
-            UpdateConfigPath();
-        }
-
-        private void UpdateConfigPath()
-        {
-            CONFIG_PATH = ProjectPath.Text + CONFIG_PATH;
-        }
-
-        private void UpdateUserPath()
-        {
-            SLACK_PATH = UserPath.Text + SLACK_PATH;
-            SPOTIFY_PATH = UserPath.Text + SPOTIFY_PATH;
-            WINDOWSTERMINAL_PATH = UserPath.Text + WINDOWSTERMINAL_PATH;
-            TEMP_ASP_FILES = UserPath.Text + TEMP_ASP_FILES;
         }
 
         private bool LaunchSlack()
@@ -271,16 +256,6 @@ namespace DevTools
             {
                 UpdateStatus("Failed to update config file.", true, false);
             }
-        }
-
-        private void OnUpdateUserPath(object sender, TextChangedEventArgs e)
-        {
-            UpdateUserPath();
-        }
-
-        private void OnUpdateConfigPath(object sender, TextChangedEventArgs e)
-        {
-            UpdateConfigPath();
         }
     }
 }

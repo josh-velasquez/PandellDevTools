@@ -64,3 +64,4 @@ F:\Repositories\PandellDevTools\DevTools\DevTools\obj\Debug\DevTools.csproj.Gene
 F:\Repositories\PandellDevTools\DevTools\DevTools\obj\Debug\DevTools.csproj.CoreCompileInputs.cache
 F:\Repositories\PandellDevTools\DevTools\DevTools\obj\Debug\DevTools.exe
 F:\Repositories\PandellDevTools\DevTools\DevTools\obj\Debug\DevTools.pdb
+D:\Repository\PandellDevTools\DevTools\DevTools\obj\Debug\DevTools.csproj.AssemblyReference.cache
