@@ -20,7 +20,7 @@ namespace DevTools
         const string TEMP_ASP_FILES = @"C:\Users\joshv\AppData\Local\Temp\Temporary ASP.NET Files";
         const string OUTLOOK_PATH = @"C:\Program Files\Microsoft Office\root\Office16\OUTLOOK.EXE";
         const string CHROME_PATH = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
-        const string CONFIG_PATH = @"\src\";
+        const string CONFIG_PATH = @"D:\Repository\LandRiteWeb\src\Pandell.LandRite.Web\Pli.config.devel.jsonc";
         IDictionary<string, string> WEBSITES = new Dictionary<string, string>()
         {
             {"GitHub", "https://github.com/pandell/LandRiteWeb"},
@@ -143,6 +143,21 @@ namespace DevTools
             {
                 var args = "google.com -incognito";
                 ProcessCommands.RunCommand(CHROME_PATH, args);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Error: " + e);
+                return false;
+            }
+            return true;
+        }
+
+        private bool TouchConfigFile()
+        {
+            try
+            {
+                var args = "touch " + CONFIG_PATH;
+                ProcessCommands.RunCommand(args);
             }
             catch (Exception e)
             {
@@ -310,6 +325,7 @@ namespace DevTools
             var spotifyCheckBox = SpotifyCheckBox.IsChecked.Value;
             var terminalCheckBox = TerminalCheckBox.IsChecked.Value;
             var vpnCheckBox = VpnCheckBox.IsChecked.Value;
+            var vsCode = VSCodeCheckBox.IsChecked.Value;
             new Thread(() =>
             {
                 UpdateStatus("Launching programs...");
@@ -339,6 +355,8 @@ namespace DevTools
                     LaunchApp(Programs.WindowsTerminal, LaunchWindowsTerminal);
 
                 // Launch VS Code
+                //if (vsCode)
+                //    LaunchApp(Programs.VSCode, LaunchVsCode);
 
                 // Delay and wait for programs to launch then resize
                 Thread.Sleep(1000);
@@ -456,7 +474,15 @@ namespace DevTools
 
         private void OnTouchConfigFile(object sender, RoutedEventArgs e)
         {
-            
+            var touchConfigFile = TouchConfigFile();
+            if (touchConfigFile)
+            {
+                UpdateStatus("Updated config file.", true, true);
+            }
+            else
+            {
+                UpdateStatus("Failed to update config file.", true, false);
+            }
         }
     }
 }

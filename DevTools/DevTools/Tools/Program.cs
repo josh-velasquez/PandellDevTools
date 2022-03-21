@@ -17,7 +17,9 @@ namespace DevTools.Tools
         [Description("wt")]
         WindowsTerminal,
         [Description("vpn")]
-        VPN
+        VPN,
+        [Description("vscode")]
+        VSCode
     }
 
     static class ProgramsTool

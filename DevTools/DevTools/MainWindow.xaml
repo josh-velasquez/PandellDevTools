@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Topmost="True"
         ResizeMode="CanMinimize"
-        Title="Dev Tools" Height="381.028" Width="589.956" Background="#FF293241">
+        Title="Dev Tools" Height="381.028" Width="603.289" Background="#FF293241">
     <Grid>
         <Grid.ColumnDefinitions>
         </Grid.ColumnDefinitions>
@@ -57,7 +57,7 @@
         <CheckBox x:Name="TerminalCheckBox" Content="Terminal" HorizontalAlignment="Left" Margin="208,32,0,0" VerticalAlignment="Top" Foreground="#FFF1FAEE" IsChecked="True"/>
         <CheckBox x:Name="VpnCheckBox" Content="VPN" HorizontalAlignment="Left" Margin="208,52,0,0" VerticalAlignment="Top" Foreground="#FFF1FAEE"/>
         <CheckBox x:Name="VSCodeCheckBox" Content="VS Code" HorizontalAlignment="Left" Margin="208,12,0,0" VerticalAlignment="Top" Foreground="#FFF1FAEE" IsChecked="True" />
-        <Button Content="Fix Windows" HorizontalAlignment="Left" Margin="437,42,0,0" VerticalAlignment="Top" Width="140" Height="26" Background="#FFEE6C4D" Foreground="#FFF1FAEE" Click="OnFixWindowsClick" >
+        <Button Content="Fix Windows" HorizontalAlignment="Left" Margin="437,0,0,284" VerticalAlignment="Bottom" Width="140" Height="26" Background="#FFEE6C4D" Foreground="#FFF1FAEE" Click="OnFixWindowsClick" >
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4" />

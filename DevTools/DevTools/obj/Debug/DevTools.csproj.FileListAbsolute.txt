@@ -35,7 +35,6 @@ D:\Repository\PandellDevTools\DeveloperTools\DevTools\DevTools\obj\Debug\DevTool
 D:\Repository\PandellDevTools\DevTools\DevTools\bin\Debug\DevTools.exe.config
 D:\Repository\PandellDevTools\DevTools\DevTools\bin\Debug\DevTools.exe
 D:\Repository\PandellDevTools\DevTools\DevTools\bin\Debug\DevTools.pdb
-D:\Repository\PandellDevTools\DevTools\DevTools\obj\Debug\DevTools.csprojAssemblyReference.cache
 D:\Repository\PandellDevTools\DevTools\DevTools\obj\Debug\MainWindow.g.cs
 D:\Repository\PandellDevTools\DevTools\DevTools\obj\Debug\PrGenerator.g.cs
 D:\Repository\PandellDevTools\DevTools\DevTools\obj\Debug\App.g.cs
@@ -65,3 +64,4 @@ F:\Repositories\PandellDevTools\DevTools\DevTools\obj\Debug\DevTools.csproj.Gene
 F:\Repositories\PandellDevTools\DevTools\DevTools\obj\Debug\DevTools.csproj.CoreCompileInputs.cache
 F:\Repositories\PandellDevTools\DevTools\DevTools\obj\Debug\DevTools.exe
 F:\Repositories\PandellDevTools\DevTools\DevTools\obj\Debug\DevTools.pdb
+D:\Repository\PandellDevTools\DevTools\DevTools\obj\Debug\DevTools.csproj.AssemblyReference.cache
