@@ -14,13 +14,32 @@ namespace DevTools
     /// </summary>
     public partial class MainWindow : Window
     {
-        string SLACK_PATH = @"C:\Users\joshv\AppData\Local\slack\slack.exe";
-        string SPOTIFY_PATH = @"C:\Users\joshv\AppData\Roaming\Spotify\Spotify.exe";
-        string WINDOWSTERMINAL_PATH = @"C:\Users\joshv\AppData\Local\Microsoft\WindowsApps\wt.exe";
-        string TEMP_ASP_FILES = @"C:\Users\joshv\AppData\Local\Temp\Temporary ASP.NET Files";
-        string OUTLOOK_PATH = @"C:\Program Files\Microsoft Office\root\Office16\OUTLOOK.EXE";
-        string CHROME_PATH = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
-        string CONFIG_PATH = @"D:\Repository\LandRiteWeb\src\Pandell.LandRite.Web\Pli.config.devel.jsonc";
+        //string SLACK_PATH = @"C:\Users\joshv\AppData\Local\slack\slack.exe";
+        //string SPOTIFY_PATH = @"C:\Users\joshv\AppData\Roaming\Spotify\Spotify.exe";
+        //string WINDOWSTERMINAL_PATH = @"C:\Users\joshv\AppData\Local\Microsoft\WindowsApps\wt.exe";
+        //string TEMP_ASP_FILES = @"C:\Users\joshv\AppData\Local\Temp\Temporary ASP.NET Files";
+        //string CONFIG_PATH = @"D:\Repository\LandRiteWeb\src\Pandell.LandRite.Web\Pli.config.devel.jsonc";
+        //string VS_CODE_PATH = @"C:\Users\joshv\AppData\Local\Programs\Microsoft VS Code\Code.exe"
+
+        //string OUTLOOK_PATH = @"C:\Program Files\Microsoft Office\root\Office16\OUTLOOK.EXE";
+        //string CHROME_PATH = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
+
+        const string SLACK_PATH = @"\Local\slack\slack.exe";
+        const string SPOTIFY_PATH = @"\Roaming\Spotify\Spotify.exe";
+        const string WINDOWS_TERMINAL_PATH = @"\Local\Microsoft\WindowsApps\wt.exe";
+        const string TEMP_ASP_FILES = @"\Local\Temp\Temporary ASP.NET Files";
+        const string CONFIG_PATH = @"\src\Pandell.LandRite.Web\Pli.config.devel.jsonc";
+        const string VS_CODE_PATH = @"\Local\Programs\Microsoft VS Code\Code.exe";
+
+        const string OUTLOOK_PATH = @"C:\Program Files\Microsoft Office\root\Office16\OUTLOOK.EXE";
+        const string CHROME_PATH = @"C:\Program Files\Google\Chrome\Application\chrome.exe";
+        
+        string USER_SLACK_PATH = "";
+        string USER_SPOTIFY_PATH = "";
+        string USER_WINDOWS_TERMINAL_PATH = "";
+        string USER_TEMP_ASP_FILES = "";
+        string USER_CONFIG_PATH = "";
+        string USER_VS_CODE_PATH = "";
         IDictionary<string, string> WEBSITES = new Dictionary<string, string>()
         {
             {"GitHub", "https://github.com/pandell/LandRiteWeb"},
@@ -39,73 +58,71 @@ namespace DevTools
         {
             try
             {
-                ProcessCommands.RunCommand(SLACK_PATH);
+                return ProcessCommands.RunCommand(USER_SLACK_PATH);
             }
             catch (Exception e)
             {
                 Debug.WriteLine("Error: " + e);
-                return false;
             }
-            return true;
+            return false;
         }
 
         private bool LaunchOutlook()
         {
             try
             {
-                ProcessCommands.RunCommand(OUTLOOK_PATH);
+                return ProcessCommands.RunCommand(OUTLOOK_PATH);
             }
             catch (Exception e)
             {
                 Debug.WriteLine("Error: " + e);
-                return false;
             }
-            return true;
+            return false;
         }
 
         private bool LaunchChromeWebsites()
         {
             try
             {
+                var results = true;
                 foreach (var website in WEBSITES)
                 {
-                    ProcessCommands.RunCommand(CHROME_PATH, website.Value);
+                    var result = ProcessCommands.RunCommand(CHROME_PATH, website.Value);
+                    results = results && result;
                 }
+                return results;
             }
             catch (Exception e)
             {
                 Debug.WriteLine("Error: " + e);
-                return false;
             }
-            return true;
+            return false;
         }
 
         private bool LaunchSpotify()
         {
             try
             {
-                ProcessCommands.RunCommand(SPOTIFY_PATH);
+                return ProcessCommands.RunCommand(USER_SPOTIFY_PATH);
             }
             catch (Exception e)
             {
                 Debug.WriteLine("Error: " + e);
-                return false;
             }
-            return true;
+            return false;
         }
 
         private bool LaunchWindowsTerminal()
         {
             try
             {
-                ProcessCommands.RunCommand(WINDOWSTERMINAL_PATH);
+                return ProcessCommands.RunCommand(USER_WINDOWS_TERMINAL_PATH);
             }
             catch (Exception e)
             {
                 Debug.WriteLine("Error: " + e);
-                return false;
             }
-            return true;
+            return false;
         }
 
         private bool LaunchIncognitoBrowser()
@@ -113,33 +130,40 @@ namespace DevTools
             try
             {
                 var args = "google.com -incognito";
-                ProcessCommands.RunCommand(CHROME_PATH, args);
+                return ProcessCommands.RunCommand(CHROME_PATH, args);
             }
             catch (Exception e)
             {
                 Debug.WriteLine("Error: " + e);
-                return false;
             }
-            return true;
+            return false;
         }
 
         private bool TouchConfigFile()
         {
             try
             {
-                var args = "touch " + CONFIG_PATH;
-                ProcessCommands.RunCommand(args);
+                var args = "touch " + USER_CONFIG_PATH;
+                return ProcessCommands.RunCommand(args);
             }
             catch (Exception e)
             {
                 Debug.WriteLine("Error: " + e);
-                return false;
             }
-            return true;
+            return false;
         }
 
         private bool LaunchVsCode()
         {
+            try
+            {
+                //var args = "start " + USER_VS_CODE_PATH;
+                return ProcessCommands.RunCommand(USER_VS_CODE_PATH);
+            }
+            catch(Exception e)
+            {
+                Debug.WriteLine("Error: " + e);
+            }
             return false;
         }
 
@@ -211,9 +235,9 @@ namespace DevTools
                 if (terminalCheckBox)
                     LaunchApp(Programs.WindowsTerminal, LaunchWindowsTerminal);
 
-                // Launch VS Code
-                //if (vsCode)
-                //    LaunchApp(Programs.VSCode, LaunchVsCode);
+                //Launch VS Code
+                if (vsCode)
+                    LaunchApp(Programs.VSCode, LaunchVsCode);
 
                 // Delay and wait for programs to launch then resize
                 Thread.Sleep(1000);
@@ -226,7 +250,7 @@ namespace DevTools
             UpdateStatus("Deleting Temporary ASP.NET Files...", false);
             try
             {
-                ProcessCommands.DeleteDirectory(TEMP_ASP_FILES);
+                ProcessCommands.DeleteDirectory(USER_TEMP_ASP_FILES);
                 UpdateStatus("Temporary ASP.NET Files deleted.", true, true);
             }
             catch (Exception ex)
@@ -256,6 +280,28 @@ namespace DevTools
             {
                 UpdateStatus("Failed to update config file.", true, false);
             }
+        }
+
+        private void OnClearClick(object sender, RoutedEventArgs e)
+        {
+            StatusListBox.Items.Clear();
+        }
+
+        private void OnUserPathChange(object sender, TextChangedEventArgs e)
+        {
+            var userPath = UserPath.Text;
+            USER_SLACK_PATH = userPath + SLACK_PATH;
+            USER_SPOTIFY_PATH = userPath + SPOTIFY_PATH;
+            USER_WINDOWS_TERMINAL_PATH = userPath + WINDOWS_TERMINAL_PATH;
+            USER_TEMP_ASP_FILES = userPath + TEMP_ASP_FILES;
+            USER_VS_CODE_PATH = userPath + VS_CODE_PATH;
+            Debug.WriteLine("PATH: " + USER_VS_CODE_PATH);
+        }
+
+        private void OnProjectPathChange(object sender, TextChangedEventArgs e)
+        {
+            var projectPath = ProjectPath.Text;
+            USER_CONFIG_PATH = projectPath + CONFIG_PATH;
         }
     }
 }

@@ -11,16 +11,18 @@ namespace DevTools.Tools
         /// Runs single command
         /// </summary>
         /// <param name="command"></param>
-        public static void RunCommand(string command)
+        public static bool RunCommand(string command)
         {
             try
             {
                 Process.Start(command);
+                return true;
             }
             catch (Exception e)
             {
                 Debug.WriteLine("Failed to run command: " + command + "\nError: " + e);
             }
+            return false;
         }
 
         /// <summary>
@@ -28,16 +30,18 @@ namespace DevTools.Tools
         /// </summary>
         /// <param name="command"></param>
         /// <param name="args"></param>
-        public static void RunCommand(string command, string args)
+        public static bool RunCommand(string command, string args)
         {
             try
             {
                 Process.Start(command, args);
+                return true;
             }
             catch (Exception e)
             {
                 Debug.WriteLine("Failed to run command: " + command + "\nError: " + e);
             }
+            return false;
         }
 
         /// <summary>
