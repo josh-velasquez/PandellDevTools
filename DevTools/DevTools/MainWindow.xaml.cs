@@ -52,6 +52,9 @@ namespace DevTools
         public MainWindow()
         {
             InitializeComponent();
+
+            var appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) + "\\AppData";
+            UserPath.Text = appDataPath;
         }
 
         private bool LaunchSlack()
@@ -295,7 +298,6 @@ namespace DevTools
             USER_WINDOWS_TERMINAL_PATH = userPath + WINDOWS_TERMINAL_PATH;
             USER_TEMP_ASP_FILES = userPath + TEMP_ASP_FILES;
             USER_VS_CODE_PATH = userPath + VS_CODE_PATH;
-            Debug.WriteLine("PATH: " + USER_VS_CODE_PATH);
         }
 
         private void OnProjectPathChange(object sender, TextChangedEventArgs e)

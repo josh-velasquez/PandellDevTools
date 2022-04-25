@@ -34,14 +34,14 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Content="Touch config file" HorizontalAlignment="Left" Margin="206,171,0,0" VerticalAlignment="Top" Width="140" Height="26" Background="#FFEE6C4D" Foreground="#FFF1FAEE" Click="OnTouchConfigFile" >
+        <Button Content="Touch config file" HorizontalAlignment="Left" Margin="206,140,0,0" VerticalAlignment="Top" Width="140" Height="26" Background="#FFEE6C4D" Foreground="#FFF1FAEE" Click="OnTouchConfigFile" >
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4" />
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Content="Incognito Browser" HorizontalAlignment="Left" Margin="206,140,0,0" VerticalAlignment="Top" Width="140" Height="26" Background="#FFEE6C4D" Foreground="#FFF1FAEE" Click="OnIncognitoClick" >
+        <Button Content="Incognito Browser" HorizontalAlignment="Left" Margin="206,171,0,0" VerticalAlignment="Top" Width="140" Height="26" Background="#FFEE6C4D" Foreground="#FFF1FAEE" Click="OnIncognitoClick" >
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4" />
@@ -54,7 +54,7 @@
         <CheckBox x:Name="SpotifyCheckBox" Content="Spotify" HorizontalAlignment="Left" Margin="120,138,0,0" VerticalAlignment="Top" Foreground="#FFF1FAEE" IsChecked="True"/>
         <CheckBox x:Name="TerminalCheckBox" Content="Terminal" HorizontalAlignment="Left" Margin="120,178,0,0" VerticalAlignment="Top" Foreground="#FFF1FAEE" IsChecked="True"/>
         <CheckBox x:Name="VSCodeCheckBox" Content="VS Code" HorizontalAlignment="Left" Margin="120,158,0,0" VerticalAlignment="Top" Foreground="#FFF1FAEE" IsChecked="True" />
-        <TextBox x:Name="UserPath" HorizontalAlignment="Left" Height="18" Margin="92,14,0,0" TextWrapping="Wrap" Text="C:\Users\joshv\AppData" VerticalAlignment="Top" Width="254" Background="#FF98C1D9" TextChanged="OnUserPathChange"/>
+        <TextBox x:Name="UserPath" HorizontalAlignment="Left" Height="18" Margin="92,14,0,0" TextWrapping="Wrap" Text="C:\Users\UserName\AppData" VerticalAlignment="Top" Width="254" Background="#FF98C1D9" TextChanged="OnUserPathChange"/>
         <Label Content="User Path:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="#FFF1FAEE" Width="77"/>
         <Label Content="Project Path:" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Foreground="#FFF1FAEE" Width="77"/>
         <TextBox x:Name="ProjectPath" HorizontalAlignment="Left" Height="18" Margin="92,45,0,0" TextWrapping="Wrap" Text="D:\Repository\LandRiteWeb" VerticalAlignment="Top" Width="254" Background="#FF98C1D9" TextChanged="OnProjectPathChange"/>
