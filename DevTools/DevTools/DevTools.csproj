@@ -74,6 +74,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GuidGenerator.xaml.cs">
+      <DependentUpon>GuidGenerator.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PrGenerator.xaml.cs">
       <DependentUpon>PrGenerator.xaml</DependentUpon>
     </Compile>
@@ -81,6 +84,10 @@
     <Compile Include="Tools\ProcessCommands.cs" />
     <Compile Include="Tools\Program.cs" />
     <Compile Include="Tools\WindowCommands.cs" />
+    <Page Include="GuidGenerator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

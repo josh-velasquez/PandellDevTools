@@ -1,0 +1,27 @@
+﻿<Window x:Class="DevTools.GuidGenerator"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DevTools"
+        mc:Ignorable="d"
+        Title="GUID Generator" Height="102.473" Width="411.574" Background="#FF293241">
+    <Grid>
+        <TextBox x:Name="GuidTextBox" HorizontalAlignment="Left" Height="20" Margin="10,10,0,0" TextWrapping="Wrap" Text="guid" VerticalAlignment="Top" Width="254" Background="#FF98C1D9" />
+        <Button Content="Generate GUID" HorizontalAlignment="Left" Margin="272,10,0,0" VerticalAlignment="Top" Width="113" Height="20" Background="#FFEE6C4D" Foreground="#FFF1FAEE" Click="OnGenerateGuidClick" >
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="4" />
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button Content="Copy" HorizontalAlignment="Left" Margin="10,35,0,0" VerticalAlignment="Top" Width="375" Height="20" Background="#FFEE6C4D" Foreground="#FFF1FAEE" Click="OnCopyClick" >
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="4" />
+                </Style>
+            </Button.Resources>
+        </Button>
+
+    </Grid>
+</Window>

@@ -305,6 +305,13 @@ namespace DevTools
             var projectPath = ProjectPath.Text;
             USER_CONFIG_PATH = projectPath + CONFIG_PATH;
         }
+
+        private void OnGuidGeneratorClick(object sender, RoutedEventArgs e)
+        {
+            GuidGenerator guidGenerator = new GuidGenerator();
+            guidGenerator.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            guidGenerator.Show();
+        }
     }
 }
  

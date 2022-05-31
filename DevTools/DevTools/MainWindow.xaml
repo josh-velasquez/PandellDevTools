@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Topmost="True"
         ResizeMode="CanMinimize"
-        Title="Dev Tools" Height="389.695" Width="377.289" Background="#FF293241">
+        Title="Dev Tools" Height="439.028" Width="377.289" Background="#FF293241">
     <Grid>
         <Button  HorizontalAlignment="Left" Margin="10,78,0,0" VerticalAlignment="Top" Width="100" Height="119" Background="#FF9C92DA" Foreground="#FFF4F1DE" Click="OnLaunchClick" >
             <Button.Resources>
@@ -25,8 +25,8 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Label Content="Status:" HorizontalAlignment="Left" Margin="10,211,0,0" VerticalAlignment="Top" Foreground="#FFF1FAEE" Width="60"/>
-        <ListBox x:Name="StatusListBox" Margin="10,242,10,10" Background="#FF98C1D9" Foreground="White"/>
+        <Label Content="Status:" HorizontalAlignment="Left" Margin="10,245,0,0" VerticalAlignment="Top" Foreground="#FFF1FAEE" Width="60"/>
+        <ListBox x:Name="StatusListBox" Margin="10,276,10,10" Background="#FF98C1D9" Foreground="White"/>
         <Button Content="Delete Temp ASP Files" HorizontalAlignment="Left" Margin="206,78,0,0" VerticalAlignment="Top" Width="140" Height="26" Background="#FFEE6C4D" Foreground="#FFF1FAEE" Click="OnDelTempAspFilesClick" >
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
@@ -58,7 +58,14 @@
         <Label Content="User Path:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="#FFF1FAEE" Width="77"/>
         <Label Content="Project Path:" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Foreground="#FFF1FAEE" Width="77"/>
         <TextBox x:Name="ProjectPath" HorizontalAlignment="Left" Height="18" Margin="92,45,0,0" TextWrapping="Wrap" Text="D:\Repository\LandRiteWeb" VerticalAlignment="Top" Width="254" Background="#FF98C1D9" TextChanged="OnProjectPathChange"/>
-        <Button Content="Clear" HorizontalAlignment="Left" Margin="206,211,0,0" VerticalAlignment="Top" Width="140" Height="26" Background="#FFFF3100" Foreground="#FFF1FAEE" Click="OnClearClick" >
+        <Button Content="Clear" HorizontalAlignment="Left" Margin="206,245,0,0" VerticalAlignment="Top" Width="140" Height="26" Background="#FFFF3100" Foreground="#FFF1FAEE" Click="OnClearClick" >
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="4" />
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button Content="Guid Generator" HorizontalAlignment="Left" Margin="206,202,0,0" VerticalAlignment="Top" Width="140" Height="26" Background="#FFEE6C4D" Foreground="#FFF1FAEE" Click="OnGuidGeneratorClick" >
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4" />
