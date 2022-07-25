@@ -27,7 +27,7 @@ namespace DevTools
         private void OnGenerateGuidClick(object sender, RoutedEventArgs e)
         {
             Guid guid = Guid.NewGuid();
-            GuidTextBox.Text = "\"" +guid.ToString() + "\"";
+            GuidTextBox.Text = "\"" +guid.ToString().ToUpper() + "\"";
         }
 
         private void OnCopyClick(object sender, RoutedEventArgs e)

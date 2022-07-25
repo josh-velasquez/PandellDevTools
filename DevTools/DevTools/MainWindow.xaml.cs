@@ -203,6 +203,7 @@ namespace DevTools
         {
             PrGenerator prGenerator = new PrGenerator();
             prGenerator.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            prGenerator.Owner = this;
             prGenerator.Show();
         }
 
@@ -310,6 +311,7 @@ namespace DevTools
         {
             GuidGenerator guidGenerator = new GuidGenerator();
             guidGenerator.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            guidGenerator.Owner = this;
             guidGenerator.Show();
         }
     }
