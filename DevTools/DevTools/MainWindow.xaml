@@ -6,7 +6,6 @@
         xmlns:local="clr-namespace:DevTools"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Topmost="True"
         ResizeMode="CanMinimize"
         Title="Dev Tools" Height="439.028" Width="377.289" Background="#FF293241">
     <Grid>

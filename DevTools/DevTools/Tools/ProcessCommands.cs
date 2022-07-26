@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.Management.Automation;
+using System.Management.Automation.Runspaces;
 using System.Text;
 
 namespace DevTools.Tools
@@ -82,6 +85,35 @@ namespace DevTools.Tools
             {
                 Debug.WriteLine("Failed to run command: " + command + "\nError: " + e);
             }
+        }
+
+
+        public static bool RunPowerShellCommand(string scriptPath, string[] scriptArguments)
+        {
+            try
+            {
+                RunspaceConfiguration runspaceConfiguration = RunspaceConfiguration.Create();
+                Runspace runspace = RunspaceFactory.CreateRunspace(runspaceConfiguration);
+                runspace.Open();
+
+                PowerShell ps = PowerShell.Create();
+                ps.Runspace = runspace;
+                ps.AddCommand(scriptPath);
+
+                foreach (string scriptParameter in scriptArguments)
+                {
+                    ps.AddArgument(scriptParameter);
+                }
+
+                Collection<PSObject> psObjects;
+                psObjects = ps.Invoke();
+                return true;
+                
+            } catch(Exception e)
+            {
+                Debug.WriteLine("Failed to run command: " + "" + "\nError: " + e);
+            }
+            return false;
         }
 
         /// <summary>

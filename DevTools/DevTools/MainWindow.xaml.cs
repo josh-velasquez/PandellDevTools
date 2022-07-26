@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -146,8 +147,10 @@ namespace DevTools
         {
             try
             {
-                var args = "touch " + USER_CONFIG_PATH;
-                return ProcessCommands.RunCommand(args);
+                var touchScriptPath = Path.Combine(Environment.CurrentDirectory, "scripts", "touchCommand.ps1");
+                Debug.WriteLine("PATHING: " + touchScriptPath);
+                var scriptArguments = new string[] { USER_CONFIG_PATH };
+                return ProcessCommands.RunPowerShellCommand(touchScriptPath, scriptArguments);
             }
             catch (Exception e)
             {
